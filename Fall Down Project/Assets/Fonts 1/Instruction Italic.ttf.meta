@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: f7cea61cff2167b4d98b578893d9d19a
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Instruction
+  fontNames:
+  - Instruction
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 444759a0e01c6894b9debaf033f46799, type: 3}
+  - {fileID: 12800000, guid: 713651528d819b64fad11d8720c7b054, type: 3}
+  - {fileID: 12800000, guid: b4f928ffbe144a24ab3bd054feb97794, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

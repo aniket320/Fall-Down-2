@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: dd4939f51faa72b479bd8bd14a91029c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Billy Ohio
+  fontNames:
+  - Billy Ohio
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5c184d69de4e0674ca05a8de9abc84ca, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
