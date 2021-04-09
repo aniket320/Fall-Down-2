@@ -201,6 +201,7 @@ MonoBehaviour:
     m_Bits: 256
   Groundpos: {fileID: 1027844615718093604}
   thirdpersonCamera: {fileID: 1027844615154810959}
+  joy: {fileID: 0}
 --- !u!114 &1027844613886690833
 MonoBehaviour:
   m_ObjectHideFlags: 0

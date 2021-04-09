@@ -10,11 +10,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager instance;
     [SerializeField] private string VersionName = "0.1";
-    [SerializeField] private GameObject UserNameMenu;
+    [SerializeField] private GameObject UserNameMenu; public GameObject usernamePanel { get { return UserNameMenu; } set { UserNameMenu = value; } }
     [SerializeField] private GameObject connetPanel;
     [SerializeField] private GameObject disconnect;
     [SerializeField] private Text loding;
-    [SerializeField] private TMP_InputField UserNameInputField;
+    [SerializeField] private TMP_InputField UserNameInputField; 
     [SerializeField] private TMP_InputField JoinGameInputField;
     [SerializeField] private TMP_InputField CreateGameInputField;
     [SerializeField] private GameObject StartButton;
@@ -25,7 +25,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     private void Start()
     {
-        UserNameMenu.SetActive(true);
+       
         if(instance == null)
         {
             instance = this;
