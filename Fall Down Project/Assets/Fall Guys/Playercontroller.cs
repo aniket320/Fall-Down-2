@@ -18,7 +18,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     private GameObject Camera;
     [SerializeField] private Transform Groundpos;
     [SerializeField] private GameObject thirdpersonCamera;
-    [SerializeField] private Joystick joy;
+    [SerializeField] private Joystick joystick;
     bool isGrounded;
     Vector3 Velocity;
     Vector3 smoothdamp;
@@ -28,6 +28,11 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     GameObject bouncer;
     // Start is called before the first frame update
 
+    private void Awake()
+    {
+        GameObject joy = GameObject.Find("Fixed Joystick");
+        joystick = joy.GetComponent<Joystick>();
+    }
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -70,8 +75,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             jumpbtnPressed = false;
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        float x =/* Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
+        float y = /*Input.GetAxis("Vertical") ||*/ joystick.Vertical;
 
         Vector3 direction = new Vector3(x, 0, y).normalized;
 
