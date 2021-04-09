@@ -69,9 +69,9 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             Velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             jumpbtnPressed = false;
         }
-        
-        float x = joy.Horizontal;
-        float y = joy.Vertical;
+
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(x, 0, y).normalized;
 

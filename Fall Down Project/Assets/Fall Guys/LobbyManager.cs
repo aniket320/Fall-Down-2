@@ -13,7 +13,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject UserNameMenu; public GameObject usernamePanel { get { return UserNameMenu; } set { UserNameMenu = value; } }
     [SerializeField] private GameObject connetPanel;
     [SerializeField] private GameObject disconnect;
-    [SerializeField] private Text loding;
+    [SerializeField] private GameObject loding;
     [SerializeField] private TMP_InputField UserNameInputField; 
     [SerializeField] private TMP_InputField JoinGameInputField;
     [SerializeField] private TMP_InputField CreateGameInputField;
@@ -50,8 +50,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedLobby()
     {
-        //if (disconnetPanel.activeSelf)
-        //    disconnetPanel.SetActive(false);
+        if (disconnect.activeSelf)
+            disconnect.SetActive(false);
 
     }
     public void UserNameInput()
