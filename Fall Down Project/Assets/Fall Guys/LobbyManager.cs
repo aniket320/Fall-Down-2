@@ -12,8 +12,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private string VersionName = "0.1";
     [SerializeField] private GameObject UserNameMenu;
     [SerializeField] private GameObject connetPanel;
-    [SerializeField] private Image disconnect;
-    [SerializeField] private Image loding;
+    [SerializeField] private GameObject disconnect;
+    [SerializeField] private Text loding;
     [SerializeField] private TMP_InputField UserNameInputField;
     [SerializeField] private TMP_InputField JoinGameInputField;
     [SerializeField] private TMP_InputField CreateGameInputField;

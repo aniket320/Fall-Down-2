@@ -24,6 +24,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     Vector3 smoothdamp;
     Quaternion smoothRotation;
     bool jumpbtnPressed =false;
+    bool side;
+    GameObject bouncer;
     // Start is called before the first frame update
 
     void Start()
@@ -108,4 +110,5 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             smoothRotation = (Quaternion)stream.ReceiveNext();
         }
     }
+    
 }

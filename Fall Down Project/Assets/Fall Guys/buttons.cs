@@ -5,7 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class buttons : MonoBehaviour
 {
-   public void CreateLobby()
+
+
+    public void Play()
+    {
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void CreateLobby()
     {
         SceneManager.LoadScene("Lobby");
     }
