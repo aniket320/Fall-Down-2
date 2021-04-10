@@ -83,18 +83,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("isjoindromm");
-<<<<<<< Updated upstream
         levelGenerate = Random.Range(1, 5);
         PhotonNetwork.LoadLevel(levelGenerate);
         
-=======
       
->>>>>>> Stashed changes
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         //base.OnJoinRoomFailed(returnCode, message);
         Debug.Log("room isn't found");
     }
-   
 }

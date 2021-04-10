@@ -41,6 +41,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        //controller.isTrigger = true;
         Camera = GameObject.Find("Main Camera");
         if (photonview.IsMine)
         {
@@ -91,7 +92,6 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.transform.eulerAngles.y;
             float rot = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentvelocity, smoothRottime);
             transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
-
             Vector3 moveAngle = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             controller.Move(moveAngle.normalized * Time.deltaTime * speed);
         }
@@ -121,5 +121,14 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             smoothRotation = (Quaternion)stream.ReceiveNext();
         }
     }
-    
+
+    private void OnTriggerEnter(Collider other)     
+    {
+        if (other.CompareTag("Finishline")){
+
+            GameManager.instace.timpass();
+            Debug.Log("isworking");
+        }
+    }
+ 
 }
