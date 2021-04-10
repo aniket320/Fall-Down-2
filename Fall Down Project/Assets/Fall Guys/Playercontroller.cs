@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Android;
 using Photon.Pun;
+using UnityEngine.UI;
+
 public class Playercontroller : MonoBehaviourPun,IPunObservable
 {
     [SerializeField] private PhotonView photonview;
     [SerializeField] private float smoothRottime;
-    private CharacterController controller;
     [SerializeField] private float speed;
     [SerializeField] private float jumpHeight =5f;
     [SerializeField] private float gravity = -9.81f;
-    [SerializeField] private float smoothMove = 10f;
-    private float currentvelocity;
-    private float GroundSphereRadius=0.1f;
-    [SerializeField]private LayerMask GroundLayer;
-    private GameObject Camera;
+    [SerializeField] private float smoothMove = 10f;   
+    [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private Transform Groundpos;
     [SerializeField] private GameObject thirdpersonCamera;
-    [SerializeField] private Joystick joystick;
+    private CharacterController controller;
+    private float currentvelocity;
+    private float GroundSphereRadius = 0.1f;
+    private GameObject Camera;
+    private Joystick joystick;
+    private Button JumpBtn;
     bool isGrounded;
     Vector3 Velocity;
     Vector3 smoothdamp;
@@ -30,6 +33,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
 
     private void Awake()
     {
+        GameObject Btn = GameObject.Find("JumpButton");
+        JumpBtn = Btn.GetComponent<Button>();
         GameObject joy = GameObject.Find("Fixed Joystick");
         joystick = joy.GetComponent<Joystick>();
     }
@@ -41,6 +46,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         {
             thirdpersonCamera.SetActive(true);            
         }
+        JumpBtn.onClick.AddListener(this.JumpButton);
         //Cursor.visible = false;
     }
 
