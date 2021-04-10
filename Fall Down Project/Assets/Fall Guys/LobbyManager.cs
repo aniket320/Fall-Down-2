@@ -24,8 +24,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //PhotonNetwork.ConnectUsingSettings(VersionName);
     }
     private void Start()
-    {
-       
+    {       
         if(instance == null)
         {
             instance = this;
@@ -84,9 +83,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("isjoindromm");
+<<<<<<< Updated upstream
         levelGenerate = Random.Range(1, 5);
         PhotonNetwork.LoadLevel(levelGenerate);
         
+=======
+      
+>>>>>>> Stashed changes
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
