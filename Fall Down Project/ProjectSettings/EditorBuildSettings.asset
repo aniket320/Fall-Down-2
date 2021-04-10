@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Fall Guys/level2.unity
     guid: a77682660f10c564a9ee2c9cb5b8fe9e
+  - enabled: 1
+    path: Assets/Fall Guys/level3.unity
+    guid: ac4ed672356f91244928dac42f0f96aa
+  - enabled: 1
+    path: Assets/Fall Guys/level4.unity
+    guid: 27fc2bbf5f9e7e445aac4cb184e9a743
   m_configObjects: {}

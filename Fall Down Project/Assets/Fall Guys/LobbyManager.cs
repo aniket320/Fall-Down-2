@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
-
+using UnityEngine.SceneManagement;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager instance;
@@ -18,7 +18,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_InputField JoinGameInputField;
     [SerializeField] private TMP_InputField CreateGameInputField;
     [SerializeField] private GameObject StartButton;
-
+    [SerializeField] public int levelGenerate;
     private void Awake()
     {
         //PhotonNetwork.ConnectUsingSettings(VersionName);
@@ -84,7 +84,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("isjoindromm");
-        PhotonNetwork.LoadLevel(Random.Range(1, 2));
+        levelGenerate = Random.Range(1, 5);
+        PhotonNetwork.LoadLevel(levelGenerate);
+        
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
