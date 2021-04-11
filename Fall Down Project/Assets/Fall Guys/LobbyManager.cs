@@ -19,6 +19,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_InputField CreateGameInputField;
     [SerializeField] private GameObject StartButton;
     [SerializeField] public int levelGenerate;
+
     private void Awake()
     {
         //PhotonNetwork.ConnectUsingSettings(VersionName);
@@ -76,17 +77,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        //RoomOptions roomOptions = new RoomOptions();
-        //roomOptions.MaxPlayers = 5;
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 5;
         PhotonNetwork.JoinRoom(JoinGameInputField.text);
     }
     public override void OnJoinedRoom()
     {
         Debug.Log("isjoindromm");
         levelGenerate = Random.Range(1, 2);
-        PhotonNetwork.LoadLevel(levelGenerate);
-        
-      
+        PhotonNetwork.LoadLevel(levelGenerate);      
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
