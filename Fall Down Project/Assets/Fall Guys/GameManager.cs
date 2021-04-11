@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     //    //PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position /*new Vector2(this.transform.position.x * randompos, this.transform.position.y)*/, Quaternion.identity);
     //}
-    public void timpass()
+    public void coroutineCall()
     {
         StartCoroutine(QualifiedPanel());
     }

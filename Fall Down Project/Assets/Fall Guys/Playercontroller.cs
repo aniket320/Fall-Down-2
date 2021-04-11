@@ -126,8 +126,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     {
         if (other.CompareTag("Finishline")){
 
-            GameManager.instace.timpass();
-            Debug.Log("isworking");
+            GameManager.instace.coroutineCall();
         }
     }
  
