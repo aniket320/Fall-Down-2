@@ -20,8 +20,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     private float currentvelocity;
     private float GroundSphereRadius = 0.1f;
     private GameObject Camera;
-    private Joystick joystick;
-    private Button JumpBtn;
+    public Joystick joystick;
+    public Button JumpBtn;
     bool isGrounded;
     Vector3 Velocity;
     Vector3 smoothdamp;
