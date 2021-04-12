@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager instance;
-    [SerializeField] private string VersionName = "0.1";
+    //[SerializeField] private string VersionName = "0.1";
     [SerializeField] private GameObject UserNameMenu; public GameObject usernamePanel { get { return UserNameMenu; } set { UserNameMenu = value; } }
     [SerializeField] private GameObject connetPanel;
     [SerializeField] private GameObject disconnect;

@@ -129,5 +129,12 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             GameManager.instace.coroutineCall();
         }
     }
- 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.CompareTag("spawnner"))
+        {
+            Debug.Log("isspawing");
+            //PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name,GameManager.instace.instatiatepos.transform.position, Quaternion.identity);
+        }
+    }
 }

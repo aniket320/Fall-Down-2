@@ -6,7 +6,7 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     public GameObject PlayerPrefab;
-    private GameObject instatiatepos;
+    public GameObject instatiatepos;
     public static GameManager instace;
     [SerializeField] private GameObject qualifiedPanel;
     private void Start()
@@ -34,4 +34,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         qualifiedPanel.SetActive(false);        
     }
+   
 }
