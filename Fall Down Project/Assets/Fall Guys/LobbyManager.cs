@@ -5,28 +5,33 @@ using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
-using UnityEngine.SceneManagement;
+using System.Linq;
+
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager instance;
     //[SerializeField] private string VersionName = "0.1";
     [SerializeField] private GameObject UserNameMenu; public GameObject usernamePanel { get { return UserNameMenu; } set { UserNameMenu = value; } }
-    [SerializeField] private GameObject connetPanel;
     [SerializeField] private GameObject disconnect;
     [SerializeField] private GameObject loding;
-    [SerializeField] private TMP_InputField UserNameInputField; 
+    [SerializeField] private TMP_InputField UserNameInputField;
     [SerializeField] private TMP_InputField JoinGameInputField;
     [SerializeField] private TMP_InputField CreateGameInputField;
     [SerializeField] private GameObject StartButton;
-    [SerializeField] public int levelGenerate;
+    [SerializeField] private TextMeshProUGUI RoomNo;
+    [SerializeField] private GameObject connectingPanel;
+    [SerializeField] private GameObject inRoom;
+    [SerializeField] private Transform PlayerListCount;
+    [SerializeField] private GameObject PlayerListPrefab;
+    //[SerializeField] public name
 
     private void Awake()
     {
         //PhotonNetwork.ConnectUsingSettings(VersionName);
     }
     private void Start()
-    {       
-        if(instance == null)
+    {
+        if (instance == null)
         {
             instance = this;
         }
@@ -36,7 +41,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void connectbutton()
     {
-        UserNameMenu.SetActive(false);       
+        UserNameMenu.SetActive(false);
     }
     public override void OnConnectedToMaster()
     {
@@ -52,7 +57,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (disconnect.activeSelf)
             disconnect.SetActive(false);
-
+        PhotonNetwork.NickName = "FallDown " + Random.Range(0, 1000).ToString("0000");
     }
     public void UserNameInput()
     {
@@ -72,24 +77,56 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(CreateGameInputField.text, new RoomOptions() { MaxPlayers = 5 }, null);
+        connectingPanel.SetActive(true);
+        float roomNo = Random.Range(60000, 99999);
+        PhotonNetwork.CreateRoom(roomNo.ToString(), new RoomOptions() { MaxPlayers = 5 }, null);
+        RoomNo.text = "Room Code:" + roomNo;
     }
 
     public void JoinRoom()
     {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 5;
+        //RoomOptions roomOptions = new RoomOptions();
+        //roomOptions.MaxPlayers = 5;
+        Debug.Log("isJoinedRoom");
         PhotonNetwork.JoinRoom(JoinGameInputField.text);
     }
     public override void OnJoinedRoom()
     {
-        Debug.Log("isjoindromm");
-        levelGenerate = Random.Range(1, 3);
-        PhotonNetwork.LoadLevel(levelGenerate);      
+        connectingPanel.SetActive(false);
+        inRoom.SetActive(true);
+        Debug.Log("isjoindromm"); 
+      
+
+        Player[] players = PhotonNetwork.PlayerList;
+        for (int i = 0; i< players.Count()  ; i++)
+        {
+            Instantiate(PlayerListPrefab, PlayerListCount).GetComponent<PlayerListCount>().setup(players[i]);
+        }
+
+    }
+
+    public void Play()
+    {
+        int levelGenerate = Random.Range(1, 3);
+        PhotonNetwork.LoadLevel(levelGenerate);
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        //base.OnJoinRoomFailed(returnCode, message);
         Debug.Log("room isn't found");
     }
+    public void leaveroom()
+    {
+        PhotonNetwork.LeaveRoom();
+        inRoom.SetActive(false);
+    }
+   
+   
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Instantiate(PlayerListPrefab, PlayerListCount).GetComponent<PlayerListCount>().setup(newPlayer);
+    }
+    //public override void OnPlayerLeftRoom(Player otherPlayer)
+    //{
+    //    Destroy()
+    //}
 }

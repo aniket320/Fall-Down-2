@@ -5,7 +5,7 @@ using UnityEngine;
 public class Controll : MonoBehaviour
 {
     public static Controll instance;
-
+        
     // Start is called before the first frame update
     void Start()
     {
