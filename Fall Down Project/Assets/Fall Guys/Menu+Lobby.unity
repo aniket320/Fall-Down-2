@@ -897,17 +897,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 215975511}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &107476725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1957,6 +1946,7 @@ MonoBehaviour:
   PlayerListCount: {fileID: 1482424734}
   PlayerListPrefab: {fileID: 911991450368176419, guid: 5318aee9231d55146a556c315c318cb7,
     type: 3}
+  Playbtn: {fileID: 107476721}
 --- !u!4 &307233301
 Transform:
   m_ObjectHideFlags: 0

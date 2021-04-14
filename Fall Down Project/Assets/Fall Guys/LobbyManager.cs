@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
+using UnityEngine.Events;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -7,7 +9,7 @@ using TMPro;
 using Photon.Realtime;
 using System.Linq;
 
-public class LobbyManager : MonoBehaviourPunCallbacks
+public class LobbyManager : MonoBehaviourPunCallbacks, ISelectHandler
 {
     public static LobbyManager instance;
     //[SerializeField] private string VersionName = "0.1";
@@ -23,6 +25,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject inRoom;
     [SerializeField] private Transform PlayerListCount;
     [SerializeField] private GameObject PlayerListPrefab;
+    [SerializeField] private GameObject Playbtn;
+    [SerializeField] private bool IsPlayTrue = false;
     //[SerializeField] public name
 
     private void Awake()
@@ -77,6 +81,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
+        Playbtn.SetActive(true);
         connectingPanel.SetActive(true);
         float roomNo = Random.Range(60000, 99999);
         PhotonNetwork.CreateRoom(roomNo.ToString(), new RoomOptions() { MaxPlayers = 5 }, null);
@@ -87,11 +92,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         //RoomOptions roomOptions = new RoomOptions();
         //roomOptions.MaxPlayers = 5;
+        Playbtn.SetActive(false);
+        RoomNo.text = "Room Code:" + JoinGameInputField.text;
         Debug.Log("isJoinedRoom");
         PhotonNetwork.JoinRoom(JoinGameInputField.text);
     }
     public override void OnJoinedRoom()
-    {
+    {        
         connectingPanel.SetActive(false);
         inRoom.SetActive(true);
         Debug.Log("isjoindromm"); 
@@ -102,13 +109,23 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             Instantiate(PlayerListPrefab, PlayerListCount).GetComponent<PlayerListCount>().setup(players[i]);
         }
-
-    }
-
+        //if (IsPlayTrue)
+        //{
+        //    PhotonNetwork.LoadLevel(1);
+        //}
+    }    
     public void Play()
     {
-        int levelGenerate = Random.Range(1, 3);
-        PhotonNetwork.LoadLevel(levelGenerate);
+        //IsPlayTrue = true;
+        //OnJoinedRoom();
+        PhotonNetwork.LoadLevel(1);
+
+        //int levelGenerate = Random.Range(1, 3);
+
+    }
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    {
+                                                                                                                                                                                                                                                                         
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
@@ -117,16 +134,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void leaveroom()
     {
         PhotonNetwork.LeaveRoom();
-        inRoom.SetActive(false);
-    }
-   
-   
+        StartCoroutine(inroomScene());
+    }    
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Instantiate(PlayerListPrefab, PlayerListCount).GetComponent<PlayerListCount>().setup(newPlayer);
     }
-    //public override void OnPlayerLeftRoom(Player otherPlayer)
-    //{
-    //    Destroy()
-    //}
-}
+    IEnumerator inroomScene()
+    {
+        yield return new WaitForSeconds(1f);
+        inRoom.SetActive(false);
+    }
+
+   
