@@ -9,7 +9,7 @@ using TMPro;
 using Photon.Realtime;
 using System.Linq;
 
-public class LobbyManager : MonoBehaviourPunCallbacks, ISelectHandler
+public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager instance;
     //[SerializeField] private string VersionName = "0.1";
@@ -26,9 +26,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, ISelectHandler
     [SerializeField] private Transform PlayerListCount;
     [SerializeField] private GameObject PlayerListPrefab;
     [SerializeField] private GameObject Playbtn;
-    [SerializeField] private bool IsPlayTrue = false;
-    //[SerializeField] public name
-
+    #region start
     private void Awake()
     {
         //PhotonNetwork.ConnectUsingSettings(VersionName);
@@ -52,6 +50,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, ISelectHandler
         PhotonNetwork.JoinLobby(TypedLobby.Default);
         loding.gameObject.SetActive(false);
         Debug.Log("isconneted");
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -76,56 +75,47 @@ public class LobbyManager : MonoBehaviourPunCallbacks, ISelectHandler
     public void startButtonClick()
     {
         UserNameMenu.SetActive(false);
-        //PhotonNetwork.playerName = UserNameInputField.text;
     }
 
     public void CreateRoom()
     {
-        Playbtn.SetActive(true);
+       
         connectingPanel.SetActive(true);
         float roomNo = Random.Range(60000, 99999);
         PhotonNetwork.CreateRoom(roomNo.ToString(), new RoomOptions() { MaxPlayers = 5 }, null);
         RoomNo.text = "Room Code:" + roomNo;
     }
-
+    #endregion
     public void JoinRoom()
     {
         //RoomOptions roomOptions = new RoomOptions();
         //roomOptions.MaxPlayers = 5;
-        Playbtn.SetActive(false);
+       
         RoomNo.text = "Room Code:" + JoinGameInputField.text;
         Debug.Log("isJoinedRoom");
         PhotonNetwork.JoinRoom(JoinGameInputField.text);
     }
     public override void OnJoinedRoom()
-    {        
+    {
         connectingPanel.SetActive(false);
         inRoom.SetActive(true);
-        Debug.Log("isjoindromm"); 
-      
+        Debug.Log("isjoindromm");
+
 
         Player[] players = PhotonNetwork.PlayerList;
-        for (int i = 0; i< players.Count()  ; i++)
+        for (int i = 0; i < players.Count(); i++)
         {
             Instantiate(PlayerListPrefab, PlayerListCount).GetComponent<PlayerListCount>().setup(players[i]);
         }
-        //if (IsPlayTrue)
-        //{
-        //    PhotonNetwork.LoadLevel(1);
-        //}
-    }    
+        Playbtn.SetActive(PhotonNetwork.IsMasterClient);
+    }
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        Playbtn.SetActive(PhotonNetwork.IsMasterClient);
+    }
     public void Play()
     {
-        //IsPlayTrue = true;
-        //OnJoinedRoom();
         PhotonNetwork.LoadLevel(1);
-
-        //int levelGenerate = Random.Range(1, 3);
-
-    }
-    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
-    {
-                                                                                                                                                                                                                                                                         
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
@@ -135,7 +125,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, ISelectHandler
     {
         PhotonNetwork.LeaveRoom();
         StartCoroutine(inroomScene());
-    }    
+    }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Instantiate(PlayerListPrefab, PlayerListCount).GetComponent<PlayerListCount>().setup(newPlayer);
@@ -146,4 +136,4 @@ public class LobbyManager : MonoBehaviourPunCallbacks, ISelectHandler
         inRoom.SetActive(false);
     }
 
-   
+} 
