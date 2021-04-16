@@ -89,7 +89,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
 
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.transform.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg/* + Camera.transform.eulerAngles.y*/;
             float rot = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentvelocity, smoothRottime);
             transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
             Vector3 moveAngle = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;

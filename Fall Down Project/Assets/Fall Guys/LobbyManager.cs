@@ -41,10 +41,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    public void connectbutton()
-    {
-        UserNameMenu.SetActive(false);
-    }
+    //public void connectbutton()
+    //{
+    //    UserNameMenu.SetActive(false);
+    //}
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
@@ -62,20 +62,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             disconnect.SetActive(false);
         PhotonNetwork.NickName = "FallDown " + Random.Range(0, 1000).ToString("0000");
     }
-    public void UserNameInput()
-    {
-        if (UserNameInputField.text.Length >= 4)
-        {
-            StartButton.SetActive(true);
-        }
-        else
-            StartButton.SetActive(false);
-    }
+    //public void UserNameInput()
+    //{
+    //    if (UserNameInputField.text.Length >= 4)
+    //    {
+    //        StartButton.SetActive(true);
+    //    }
+    //    else
+    //        StartButton.SetActive(false);
+    //}
 
-    public void startButtonClick()
-    {
-        UserNameMenu.SetActive(false);
-    }
+    //public void startButtonClick()
+    //{
+    //    UserNameMenu.SetActive(false);
+    //}
 
     public void CreateRoom()
     {
