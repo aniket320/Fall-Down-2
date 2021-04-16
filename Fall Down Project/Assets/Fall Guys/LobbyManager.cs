@@ -26,7 +26,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private Transform PlayerListCount;
     [SerializeField] private GameObject PlayerListPrefab;
     [SerializeField] private GameObject Playbtn;
-    #region start
     private void Awake()
     {
         //PhotonNetwork.ConnectUsingSettings(VersionName);
@@ -85,7 +84,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(roomNo.ToString(), new RoomOptions() { MaxPlayers = 5 }, null);
         RoomNo.text = "Room Code:" + roomNo;
     }
-    #endregion
     public void JoinRoom()
     {
         //RoomOptions roomOptions = new RoomOptions();
