@@ -44,22 +44,28 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //{
     //    UserNameMenu.SetActive(false);
     //}
+    public void connect()
+    {
+        PhotonNetwork.ConnectUsingSettings();
+    }
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
         loding.gameObject.SetActive(false);
         Debug.Log("isconneted");
         PhotonNetwork.AutomaticallySyncScene = true;
+    
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
         disconnect.gameObject.SetActive(true);
-    }
+        Debug.Log("isDisconnected");
+    }  
     public override void OnJoinedLobby()
     {
-        if (disconnect.activeSelf)
+        if(disconnect.activeSelf)
             disconnect.SetActive(false);
-        PhotonNetwork.NickName = "FallDown " + Random.Range(0, 1000).ToString("0000");
+        PhotonNetwork.NickName = "FallDown#" + Random.Range(0, 1000).ToString("0000");
     }
     //public void UserNameInput()
     //{
@@ -77,11 +83,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //}
 
     public void CreateRoom()
-    {
-       
+    {       
         connectingPanel.SetActive(true);
         float roomNo = Random.Range(60000, 99999);
-        PhotonNetwork.CreateRoom(roomNo.ToString(), new RoomOptions() { MaxPlayers = 5 }, null);
+        PhotonNetwork.CreateRoom(roomNo.ToString(), new RoomOptions() { MaxPlayers = 20 }, null);
         RoomNo.text = "Room Code:" + roomNo;
     }
     public void JoinRoom()
@@ -97,7 +102,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         connectingPanel.SetActive(false);
         inRoom.SetActive(true);
-        Debug.Log("isjoindromm");
+        Debug.Log("isjoindroom");
 
 
         Player[] players = PhotonNetwork.PlayerList;
