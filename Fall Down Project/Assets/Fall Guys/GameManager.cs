@@ -5,18 +5,46 @@ using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject PlayerPrefab;
-    public GameObject instatiatepos;
     public static GameManager instace;
+    [SerializeField] private GameObject PlayerPrefab;
     [SerializeField] private GameObject qualifiedPanel;
+    [SerializeField] private GameObject FinishPanel;
+    [SerializeField] private int NoOfPlayers;
+    [SerializeField] private int NoOfPlayerCanQualifie;
+    public int NoOfPlayerQualified;
+    GameObject instatiatepos;
+    public GameObject[] QualifiedPlayer;
+
     private void Start()
-    {
-        if(instace== null)
+    {      
+        if (instace == null)
         {
             instace = this;
         }
+        else Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
         instatiatepos = GameObject.Find("InstacePos");
-        PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position /*new Vector2(this.transform.position.x * randompos, this.transform.position.y)*/, Quaternion.identity); 
+        PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position /*new Vector2(this.transform.position.x * randompos, this.transform.position.y)*/, Quaternion.identity);
+        StartCoroutine(LevelStart());
+        GameObject[] PlayersCount = GameObject.FindGameObjectsWithTag("Player");
+        NoOfPlayers = PlayersCount.Length;
+        if (NoOfPlayers % 2 == 0)
+        {
+            NoOfPlayerCanQualifie = NoOfPlayers / 2;
+        }
+        else
+        {
+            NoOfPlayerCanQualifie = (NoOfPlayers + 1) / 2;
+        }
+    }
+    private void Update()
+    {
+        if(NoOfPlayerQualified == NoOfPlayerCanQualifie)
+        {
+            FinishPanel.SetActive(true);
+            //StartCoroutine(NextLevel());
+        }
+      
     }
     //public void SpawnPlayer()
     //{
@@ -34,5 +62,13 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         qualifiedPanel.SetActive(false);        
     }
-   
+    public IEnumerator LevelStart()
+    {
+        yield return new WaitForSeconds(2);
+    }
+    public IEnumerator NextLevel()
+    {
+        yield return new WaitForSeconds(4);
+        LobbyManager.instance.Play();    
+    }
 }

@@ -13,6 +13,7 @@ public class PlayerListCount : MonoBehaviourPunCallbacks
     {
         player = _player;
         text.text = player.NickName;
+        
     }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {

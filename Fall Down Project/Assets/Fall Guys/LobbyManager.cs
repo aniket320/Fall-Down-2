@@ -104,13 +104,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         inRoom.SetActive(true);
         Debug.Log("isjoindroom");
 
-
         Player[] players = PhotonNetwork.PlayerList;
         for (int i = 0; i < players.Count(); i++)
         {
             Instantiate(PlayerListPrefab, PlayerListCount).GetComponent<PlayerListCount>().setup(players[i]);
         }
         Playbtn.SetActive(PhotonNetwork.IsMasterClient);
+      
     }
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
@@ -137,6 +137,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(1f);
         inRoom.SetActive(false);
+        
     }
 
 } 

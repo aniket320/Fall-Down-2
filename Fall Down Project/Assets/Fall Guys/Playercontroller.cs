@@ -125,8 +125,11 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     private void OnTriggerEnter(Collider other)     
     {
         if (other.CompareTag("Finishline")){
-
+            if(photonview.IsMine)
             GameManager.instace.coroutineCall();
+
+            GameManager.instace.NoOfPlayerQualified++;
+            //GameManager.instace.QualifiedPlayer 
         }
     }
     //private void OnControllerColliderHit(ControllerColliderHit hit)
