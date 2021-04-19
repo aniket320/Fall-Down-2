@@ -6,26 +6,31 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instace;
-    [SerializeField] private GameObject PlayerPrefab;
+    [SerializeField] private GameObject PlayerPrefab; 
     [SerializeField] private GameObject qualifiedPanel;
     [SerializeField] private GameObject FinishPanel;
     [SerializeField] private int NoOfPlayers;
-    [SerializeField] private int NoOfPlayerCanQualifie;
+    public int NoOfPlayerCanQualifie;
     public int NoOfPlayerQualified;
     GameObject instatiatepos;
     public GameObject[] QualifiedPlayer;
 
     private void Start()
-    {      
+    {
+
         if (instace == null)
         {
             instace = this;
         }
         else Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+
+
         instatiatepos = GameObject.Find("InstacePos");
         PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position /*new Vector2(this.transform.position.x * randompos, this.transform.position.y)*/, Quaternion.identity);
         StartCoroutine(LevelStart());
+
+
         GameObject[] PlayersCount = GameObject.FindGameObjectsWithTag("Player");
         NoOfPlayers = PlayersCount.Length;
         if (NoOfPlayers % 2 == 0)
@@ -36,6 +41,9 @@ public class GameManager : MonoBehaviour
         {
             NoOfPlayerCanQualifie = (NoOfPlayers + 1) / 2;
         }
+
+        QualifiedPlayer = new GameObject[NoOfPlayerCanQualifie];
+
     }
     private void Update()
     {
@@ -44,7 +52,7 @@ public class GameManager : MonoBehaviour
             FinishPanel.SetActive(true);
             //StartCoroutine(NextLevel());
         }
-      
+        //QualifiedPlayer = GameObject.FindGameObjectsWithTag("Player");
     }
     //public void SpawnPlayer()
     //{

@@ -638,7 +638,7 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 1027844613886690829, guid: 223a0c2f677476e4cbb3db00f1e523e4,
     type: 3}
   qualifiedPanel: {fileID: 1799874502816992335}
-  FinishPanel: {fileID: 2032196266563814505}
+  FinishPanel: {fileID: 0}
   NoOfPlayers: 0
   NoOfPlayerCanQualifie: 0
   NoOfPlayerQualified: 0
