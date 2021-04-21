@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instace;
-    [SerializeField] private GameObject PlayerPrefab;
+    [SerializeField] private GameObject PlayerPrefab; 
     public GameObject WinPanel;
-    public TMP_Text[] WinnernameText;
+    public TMP_Text WinnernameText;
     //[SerializeField] private GameObject FinishPanel;
     [SerializeField] private int NoOfPlayers;
     public int NoOfPlayerCanQualifie;
@@ -33,8 +34,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LevelStart());
 
 
-        GameObject[] PlayersCount = GameObject.FindGameObjectsWithTag("Player");
-
+        //GameObject[] PlayersCount = GameObject.FindGameObjectsWithTag("Player");
         //NoOfPlayers = PlayersCount.Length;
         //if (NoOfPlayers % 2 == 0)
         //{
@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour
     //    yield return new WaitForSeconds(2);
     //    qualifiedPanel.SetActive(false);        
     //}
+    public void leaveGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
     public IEnumerator LevelStart()
     {
         yield return new WaitForSeconds(2);
