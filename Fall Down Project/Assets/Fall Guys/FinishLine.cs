@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,19 +17,20 @@ public class FinishLine : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (GameManager.instace.NoOfPlayerQualified <= GameManager.instace.NoOfPlayerCanQualifie)
-        {
-            if (other.CompareTag("Player"))
-            {              
-                for(int i = 0; i<= GameManager.instace.NoOfPlayerCanQualifie; i++)
-                {
-                    Debug.Log(other.gameObject.name);
-                }             
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (GameManager.instace.NoOfPlayerQualified <= GameManager.instace.NoOfPlayerCanQualifie)
+    //    {
+    //        if (other.CompareTag("Player"))
+    //        {              
+    //            for(int i = 0; i<= GameManager.instace.NoOfPlayerCanQualifie; i++)
+    //            {
+    //                Debug.Log(other.gameObject.name);
+                  
+    //            }             
 
-            }
-        }
+    //        }
+    //    }
 
-    }
+    //}
 }

@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instace;
-    [SerializeField] private GameObject PlayerPrefab; 
-    [SerializeField] private GameObject qualifiedPanel;
-    [SerializeField] private GameObject FinishPanel;
+    [SerializeField] private GameObject PlayerPrefab;
+    public GameObject WinPanel;
+    public TMP_Text[] WinnernameText;
+    //[SerializeField] private GameObject FinishPanel;
     [SerializeField] private int NoOfPlayers;
     public int NoOfPlayerCanQualifie;
     public int NoOfPlayerQualified;
     GameObject instatiatepos;
-    public GameObject[] QualifiedPlayer;
+    //public GameObject[] QualifiedPlayer;
 
     private void Start()
     {
@@ -27,32 +29,32 @@ public class GameManager : MonoBehaviour
 
 
         instatiatepos = GameObject.Find("InstacePos");
-        PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position /*new Vector2(this.transform.position.x * randompos, this.transform.position.y)*/, Quaternion.identity);
+        PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity);
         StartCoroutine(LevelStart());
 
 
         GameObject[] PlayersCount = GameObject.FindGameObjectsWithTag("Player");
-        NoOfPlayers = PlayersCount.Length;
-        if (NoOfPlayers % 2 == 0)
-        {
-            NoOfPlayerCanQualifie = NoOfPlayers / 2;
-        }
-        else
-        {
-            NoOfPlayerCanQualifie = (NoOfPlayers + 1) / 2;
-        }
 
-        QualifiedPlayer = new GameObject[NoOfPlayerCanQualifie];
+        //NoOfPlayers = PlayersCount.Length;
+        //if (NoOfPlayers % 2 == 0)
+        //{
+        //    NoOfPlayerCanQualifie = NoOfPlayers / 2;
+        //}
+        //else
+        //{
+        //    NoOfPlayerCanQualifie = (NoOfPlayers + 1) / 2;
+        //}
+
+        //QualifiedPlayer = new GameObject[NoOfPlayerCanQualifie];
 
     }
     private void Update()
     {
         if(NoOfPlayerQualified == NoOfPlayerCanQualifie)
         {
-            FinishPanel.SetActive(true);
+            //FinishPanel.SetActive(true);
             //StartCoroutine(NextLevel());
         }
-        //QualifiedPlayer = GameObject.FindGameObjectsWithTag("Player");
     }
     //public void SpawnPlayer()
     //{
@@ -60,23 +62,23 @@ public class GameManager : MonoBehaviour
 
     //    //PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position /*new Vector2(this.transform.position.x * randompos, this.transform.position.y)*/, Quaternion.identity);
     //}
-    public void coroutineCall()
-    {
-        StartCoroutine(QualifiedPanel());
-    }
-    public IEnumerator QualifiedPanel()
-    {
-        qualifiedPanel.SetActive(true);
-        yield return new WaitForSeconds(2);
-        qualifiedPanel.SetActive(false);        
-    }
+    //public void coroutineCall()
+    //{
+    //    StartCoroutine(QualifiedPanel());
+    //}
+    //public IEnumerator QualifiedPanel()
+    //{
+    //    qualifiedPanel.SetActive(true);
+    //    yield return new WaitForSeconds(2);
+    //    qualifiedPanel.SetActive(false);        
+    //}
     public IEnumerator LevelStart()
     {
         yield return new WaitForSeconds(2);
     }
-    public IEnumerator NextLevel()
-    {
-        yield return new WaitForSeconds(4);
-        LobbyManager.instance.Play();    
-    }
+    //public IEnumerator NextLevel()
+    //{
+    //    yield return new WaitForSeconds(4);
+    //    LobbyManager.instance.Play();    
+    //}
 }
