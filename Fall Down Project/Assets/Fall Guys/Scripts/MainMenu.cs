@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -16,6 +17,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         percentageText = GetComponent<Text>();
+        //PhotonNetwork.ConnectUsingSettings();
     }
 
     // Update is called once per frame
@@ -28,7 +30,10 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Play");
     }   
-   
+   public void Party()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
     public void QuitYes()
     {
         Application.Quit();

@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -13,19 +11,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager instance;
     //[SerializeField] private string VersionName = "0.1";
-    [SerializeField] private GameObject UserNameMenu; public GameObject usernamePanel { get { return UserNameMenu; } set { UserNameMenu = value; } }
-    [SerializeField] private GameObject disconnect;
+    //[SerializeField] private GameObject UserNameMenu; public GameObject usernamePanel { get { return UserNameMenu; } set { UserNameMenu = value; } }
+    //[SerializeField] private GameObject disconnect;
     [SerializeField] private GameObject loding;
-    [SerializeField] private TMP_InputField UserNameInputField;
+    //[SerializeField] private TMP_InputField UserNameInputField;
     [SerializeField] private TMP_InputField JoinGameInputField;
     [SerializeField] private TMP_InputField CreateGameInputField;
-    [SerializeField] private GameObject StartButton;
+    //[SerializeField] private GameObject StartButton;
     [SerializeField] private TextMeshProUGUI RoomNo;
     [SerializeField] private GameObject connectingPanel;
     [SerializeField] private GameObject inRoom;
     [SerializeField] private Transform PlayerListCount;
     [SerializeField] private GameObject PlayerListPrefab;
     [SerializeField] private GameObject Playbtn;
+
     private void Awake()
     {
         //PhotonNetwork.ConnectUsingSettings(VersionName);
@@ -36,14 +35,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             instance = this;
         }
-        loding.gameObject.SetActive(true);
         PhotonNetwork.ConnectUsingSettings();
+        //loding.gameObject.SetActive(true);
+
     }
 
     //public void connectbutton()
     //{
     //    UserNameMenu.SetActive(false);
     //}
+
     public void connect()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -51,20 +52,19 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
-        loding.gameObject.SetActive(false);
+        //loding.gameObject.SetActive(false);
         Debug.Log("isconneted");
-        PhotonNetwork.AutomaticallySyncScene = true;
-    
+        PhotonNetwork.AutomaticallySyncScene = true;    
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
-        disconnect.gameObject.SetActive(true);
+        //disconnect.gameObject.SetActive(true);
         Debug.Log("isDisconnected");
     }  
     public override void OnJoinedLobby()
     {
-        if(disconnect.activeSelf)
-            disconnect.SetActive(false);
+        //if(disconnect.activeSelf)
+        //    disconnect.SetActive(false);
         PhotonNetwork.NickName = "FallDown#" + Random.Range(0, 1000).ToString("0000");
     }
     //public void UserNameInput()
@@ -98,6 +98,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("isJoinedRoom");
         PhotonNetwork.JoinRoom(JoinGameInputField.text);
     }
+    public void backButton()
+    {       
+        PhotonNetwork.Disconnect(); StartCoroutine(ReturnTMenu());
+    }
+    IEnumerator ReturnTMenu()
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+    }
     public override void OnJoinedRoom()
     {
         connectingPanel.SetActive(false);
@@ -118,7 +130,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public void Play()
     {
-        PhotonNetwork.LoadLevel(1);
+        PhotonNetwork.LoadLevel(2);
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {

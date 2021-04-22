@@ -36,6 +36,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     }
     void Start()
     {
+        GameManager.instace.WinPanel.SetActive(false);
         firstPlayer = false;
         rb = GetComponent<Rigidbody>();
         Camera = GameObject.Find("Main Camera");
@@ -123,6 +124,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
                 {
                     GameManager.instace.WinPanel.SetActive(true);
                     GameManager.instace.WinnernameText.text = " Winner: " + PhotonNetwork.NickName;
+                    //PhotonNetwork.Destroy(this.gameObject);
                 }
                 //if (photonview.IsMine)
                 //GameManager.instace.coroutineCall();

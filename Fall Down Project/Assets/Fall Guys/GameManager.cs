@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instace;
     [SerializeField] private GameObject PlayerPrefab; 
+    [SerializeField] private GameObject MainMenu;
     public GameObject WinPanel;
     public TMP_Text WinnernameText;
     //[SerializeField] private GameObject FinishPanel;
@@ -16,12 +17,12 @@ public class GameManager : MonoBehaviour
     public int NoOfPlayerCanQualifie;
     public int NoOfPlayerQualified;
     GameObject instatiatepos;
+    
     //public GameObject[] QualifiedPlayer;
 
     private void Start()
     {
-
-        if (instace == null)
+        if(instace == null)
         {
             instace = this;
         }
@@ -32,7 +33,6 @@ public class GameManager : MonoBehaviour
         instatiatepos = GameObject.Find("InstacePos");
         PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity);
         StartCoroutine(LevelStart());
-
 
         //GameObject[] PlayersCount = GameObject.FindGameObjectsWithTag("Player");
         //NoOfPlayers = PlayersCount.Length;
@@ -50,11 +50,11 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if(NoOfPlayerQualified == NoOfPlayerCanQualifie)
-        {
-            //FinishPanel.SetActive(true);
-            //StartCoroutine(NextLevel());
-        }
+        //if(NoOfPlayerQualified == NoOfPlayerCanQualifie)
+        //{
+        //    //FinishPanel.SetActive(true);
+        //    //StartCoroutine(NextLevel());
+        //}
     }
     //public void SpawnPlayer()
     //{
@@ -74,7 +74,16 @@ public class GameManager : MonoBehaviour
     //}
     public void leaveGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        StartCoroutine(ReturnTLobby());
+    }
+    IEnumerator ReturnTLobby()
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        //LobbyManager.instance.inroom = true;
+        SceneManager.LoadScene("Party");
+
     }
     public IEnumerator LevelStart()
     {

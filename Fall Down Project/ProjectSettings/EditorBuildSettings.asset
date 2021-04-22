@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Fall Guys/Menu+Lobby.unity
     guid: 1c5170c975baa5c4aaba6a1a6bd66f03
   - enabled: 1
+    path: Assets/Fall Guys/Party.unity
+    guid: 4eca58470a58e6848b7cd45d6196612c
+  - enabled: 1
     path: Assets/Fall Guys/Level 01 Edited.unity
     guid: 38a2be6d12bb50e4fb98fbe68d2a2f27
   - enabled: 1

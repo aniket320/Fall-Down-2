@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307233300}
+      - m_Target: {fileID: 0}
         m_MethodName: connect
         m_Mode: 1
         m_Arguments:
@@ -886,7 +886,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307233300}
+      - m_Target: {fileID: 0}
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -1540,7 +1540,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307233300}
+      - m_Target: {fileID: 0}
         m_MethodName: connectbutton
         m_Mode: 1
         m_Arguments:
@@ -1933,13 +1933,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e511cf44e18ea44a946337ad4ff6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UserNameMenu: {fileID: 231845007}
-  disconnect: {fileID: 490860426}
   loding: {fileID: 812931237}
-  UserNameInputField: {fileID: 1186651482}
   JoinGameInputField: {fileID: 1960841224}
   CreateGameInputField: {fileID: 45487403}
-  StartButton: {fileID: 189597156}
   RoomNo: {fileID: 453662054}
   connectingPanel: {fileID: 1099533083}
   inRoom: {fileID: 215975511}
@@ -2803,7 +2799,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307233300}
+      - m_Target: {fileID: 0}
         m_MethodName: CreateRoom
         m_Mode: 1
         m_Arguments:
@@ -4425,7 +4421,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307233300}
+      - m_Target: {fileID: 0}
         m_MethodName: JoinRoom
         m_Mode: 1
         m_Arguments:
@@ -7043,7 +7039,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307233300}
+      - m_Target: {fileID: 0}
         m_MethodName: leaveroom
         m_Mode: 1
         m_Arguments:
@@ -7384,7 +7380,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 307233300}
+      - m_Target: {fileID: 0}
         m_MethodName: UserNameInput
         m_Mode: 1
         m_Arguments:
@@ -7542,7 +7538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1252430940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10441,9 +10437,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2027784799}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 2027784800}
+        m_MethodName: Party
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 367561316688e4f488d4809b12cad7e9,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1712,8 +1712,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586200883343798350, guid: 2aefd42c9a2e8e44f81a0eb4a4c1264a,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1462743572}
+    - target: {fileID: 1586200883343798350, guid: 2aefd42c9a2e8e44f81a0eb4a4c1264a,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586200883343798350, guid: 2aefd42c9a2e8e44f81a0eb4a4c1264a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: leaveGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586200883343798350, guid: 2aefd42c9a2e8e44f81a0eb4a4c1264a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1799874502816992335, guid: 2aefd42c9a2e8e44f81a0eb4a4c1264a,
         type: 3}
@@ -4261,6 +4276,18 @@ Transform:
   m_Father: {fileID: 150571333}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 107.05701, y: -43.07199, z: -42.268982}
+--- !u!114 &1462743572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8285864391949265986, guid: 2aefd42c9a2e8e44f81a0eb4a4c1264a,
+    type: 3}
+  m_PrefabInstance: {fileID: 502338048}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef38f6a081184f4092135f4d9e35b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1500980250
 GameObject:
   m_ObjectHideFlags: 0
