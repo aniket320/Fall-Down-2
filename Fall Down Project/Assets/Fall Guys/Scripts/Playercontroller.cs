@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Android;
 using Photon.Pun;
 using UnityEngine.UI;
+using TMPro;
 
 public class Playercontroller : MonoBehaviourPun,IPunObservable
 {
@@ -16,6 +17,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     [SerializeField] private Transform Groundpos;
     [SerializeField] private GameObject thirdpersonCamera;
     [SerializeField] private bool firstPlayer;
+    [SerializeField] private TMP_Text PlayerNameText;
     Rigidbody rb;
     float currentvelocity;
     float GroundSphereRadius = 0.1f;
@@ -36,23 +38,29 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     }
     void Start()
     {
-        GameManager.instace.WinPanel.SetActive(false);
+        //GameManager.instace.WinPanel.SetActive(false);
         firstPlayer = false;
         rb = GetComponent<Rigidbody>();
         Camera = GameObject.Find("Main Camera");
         if (photonview.IsMine)
         {
             thirdpersonCamera.SetActive(true);
+            PlayerNameText.text = PhotonNetwork.NickName;
         }
+        else
+            PlayerNameText.text = photonView.Owner.NickName;
+
         JumpBtn.onClick.AddListener(JumpButton);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(photonView.IsMine)
+        if(photonView.IsMine) 
         {
             playerMove();
+            PlayerPrefs.GetString("UserName");
+
         }
         else
         {

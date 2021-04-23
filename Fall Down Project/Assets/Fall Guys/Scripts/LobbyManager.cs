@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
@@ -65,7 +64,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         //if(disconnect.activeSelf)
         //    disconnect.SetActive(false);
-        PhotonNetwork.NickName = "FallDown#" + Random.Range(0, 1000).ToString("0000");
+        //PlayerPrefs.GetString("UserName");
+        if(PlayerPrefs.GetString("UserName") != null)
+          PhotonNetwork.NickName = PlayerPrefs.GetString("UserName");
+
+    else  PhotonNetwork.NickName = "FallDown#" + Random.Range(0, 1000).ToString("0000");
+
     }
     //public void UserNameInput()
     //{
