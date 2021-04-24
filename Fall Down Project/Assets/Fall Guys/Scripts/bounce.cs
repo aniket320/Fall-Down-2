@@ -1,27 +1,39 @@
-﻿using System.Collections;
+﻿using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class bounce : MonoBehaviour
 {
 
-    public float str = 0.2f;
+  
+
     private Rigidbody rb;
 
 
-     void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionEnter(Collision other)
+    void Update()
     {
-        if(other.gameObject.tag=="Bouncer")
-        {
+        //generate vector in the direction of jump pad's y axis multiplied with a factor jumpForce
 
-            rb.AddForce(rb.velocity*str,ForceMode.Impulse);
-            //Vector3 direction = (transform.position - other.transform.position).normalized;
-           // rb.velocity = Vector3.forward * speed;
-        }
     }
+
+    void OnCollisionEnter(Collision other)
+     {
+         if (other.gameObject.CompareTag("Bouncer"))
+         {
+             rb.AddForce(Vector3.back *  150);
+            rb.AddForce(Vector3.up * 100);
+             
+         }
+     }
+
+    
+    
+
 }

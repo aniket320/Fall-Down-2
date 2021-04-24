@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public int NoOfPlayerQualified;
     GameObject instatiatepos;
     
+
     //public GameObject[] QualifiedPlayer;
 
     private void Start()
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         //LobbyManager.instance.inroom = true;
         SceneManager.LoadScene("Party");
+       
 
     }
     public IEnumerator LevelStart()

@@ -15,24 +15,30 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Text percentageText;
     [SerializeField] private TMP_InputField UserName;
     [SerializeField] private TMP_Text UsernamesDisplay;
+
     // [SerializeField]public AudioMixer audiomixer;
     // Start is called before the first frame update
     void Start()
     {
         percentageText = GetComponent<Text>();
-        //UserName.text = PhotonNetwork.NickName = "FallDown#" + Random.Range(0, 1000).ToString("0000");
-        //PhotonNetwork.ConnectUsingSettings();
+         
+            
     }
 
+
+    private void Awake()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+           
+    }
     // Update is called once per frame
     void Update()
     {
-       
+        
     }
     private void LateUpdate()
     {
-        UsernamesDisplay.text = PlayerPrefs.GetString("UserName");
-
+            UsernamesDisplay.text = PlayerPrefs.GetString("UserName");
     }
     public void Play()
     {
@@ -40,7 +46,7 @@ public class MainMenu : MonoBehaviour
     }   
     public void Party()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        PhotonNetwork.LoadLevel("Party");
     }
     public void QuitYes()
     {
@@ -54,7 +60,11 @@ public class MainMenu : MonoBehaviour
 
     public void saveUsername()
     {
-        PlayerPrefs.SetString("UserName",PhotonNetwork.NickName = UserName.text);
+       
+
+       PlayerPrefs.SetString("UserName",PhotonNetwork.NickName = UserName.text);
+      
+
     }
 
 

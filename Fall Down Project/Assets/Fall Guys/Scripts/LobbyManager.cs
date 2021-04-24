@@ -36,6 +36,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
         PhotonNetwork.ConnectUsingSettings();
         //loding.gameObject.SetActive(true);
+        PhotonNetwork.AutomaticallySyncScene = true;
 
     }
 
@@ -51,7 +52,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
-        //loding.gameObject.SetActive(false);
+        loding.gameObject.SetActive(false);
         Debug.Log("isconneted");
         PhotonNetwork.AutomaticallySyncScene = true;    
     }
@@ -65,10 +66,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //if(disconnect.activeSelf)
         //    disconnect.SetActive(false);
         //PlayerPrefs.GetString("UserName");
-        if(PlayerPrefs.GetString("UserName") != null)
-          PhotonNetwork.NickName = PlayerPrefs.GetString("UserName");
+        if (PlayerPrefs.GetString("UserName") != null)
+            PhotonNetwork.NickName = PlayerPrefs.GetString("UserName");
 
-    else  PhotonNetwork.NickName = "FallDown#" + Random.Range(0, 1000).ToString("0000");
+
+       
+
+
+
 
     }
     //public void UserNameInput()

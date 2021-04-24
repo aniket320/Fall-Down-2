@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 367561316688e4f488d4809b12cad7e9,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3079,7 +3079,7 @@ GameObject:
   - component: {fileID: 1062422287}
   m_Layer: 8
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: Bouncer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6327,6 +6327,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mixer rotator (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1164511206496438500, guid: 66e2d9bb757558649b25be50d3f790b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bouncer
+      objectReference: {fileID: 0}
     - target: {fileID: 1164511206496438501, guid: 66e2d9bb757558649b25be50d3f790b7,
         type: 3}
       propertyPath: m_RootOrder
@@ -6557,6 +6562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Thrower
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041949104871234559, guid: b3179580bfd0b454ebea77f1fd2c4ab3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bouncer
       objectReference: {fileID: 0}
     - target: {fileID: 6150499108325019762, guid: b3179580bfd0b454ebea77f1fd2c4ab3,
         type: 3}
