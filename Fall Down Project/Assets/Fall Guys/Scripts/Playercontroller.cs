@@ -60,7 +60,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         {
             playerMove();
             PlayerPrefs.GetString("UserName");
-
+            
         }
         else
         {
@@ -69,7 +69,11 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     }
     private void Update()
     {
-        
+       
+    }
+    private void LateUpdate()
+    {
+       
     }
     public void SmoothMoveOtherScreenPlayer()
     {
@@ -85,6 +89,12 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime,ForceMode.Impulse);
         }
 
+        if (this.transform.position.y <= -15f)
+        {
+           Destroy(this.gameObject);
+           PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name,GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
+        }
+
         float x = /*Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
         float y = /*Input.GetAxis("Vertical") ||*/ joystick.Vertical;
 
@@ -92,12 +102,11 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
 
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.transform.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.transform.eulerAngles.y; 
             float rot = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentvelocity, smoothRottime);
             transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
             Vector3 moveAngle = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             rb.MovePosition(rb.position + moveAngle * Time.fixedDeltaTime * speed);
-
         }        
     }
     public void JumpButton()
@@ -123,8 +132,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.instace.NoOfPlayerQualified <= GameManager.instace.NoOfPlayerCanQualifie)
-        {
+        //if (GameManager.instace.NoOfPlayerQualified <= GameManager.instace.NoOfPlayerCanQualifie)
+        //{
             if (other.CompareTag("Finishline"))
             {
                 firstPlayer = true;
@@ -141,7 +150,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
 
 
             }
-        }
+        //}
 
     }
 

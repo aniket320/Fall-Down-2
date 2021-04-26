@@ -8,31 +8,30 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instace;
-    [SerializeField] private GameObject PlayerPrefab; 
-    [SerializeField] private GameObject MainMenu;
+    public GameObject PlayerPrefab; 
+    //[SerializeField] private GameObject MainMenu;
     public GameObject WinPanel;
     public TMP_Text WinnernameText;
-    //[SerializeField] private GameObject FinishPanel;
-    [SerializeField] private int NoOfPlayers;
-    public int NoOfPlayerCanQualifie;
-    public int NoOfPlayerQualified;
-    GameObject instatiatepos;
+    //[SerializeField] private int NoOfPlayers;
+    //public int NoOfPlayerCanQualifie;
+    //public int NoOfPlayerQualified;
+    public GameObject instatiatepos;
     
 
     //public GameObject[] QualifiedPlayer;
 
+
     private void Start()
     {
-        if(instace == null)
+        if (instace == null)
         {
             instace = this;
         }
-        else Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
+        //else Destroy(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
-
-        instatiatepos = GameObject.Find("InstacePos");
-        PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity);
+        instatiatepos = GameObject.FindGameObjectWithTag("RespawnPos");
+        PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity,0);
         StartCoroutine(LevelStart());
 
         //GameObject[] PlayersCount = GameObject.FindGameObjectsWithTag("Player");
@@ -82,9 +81,7 @@ public class GameManager : MonoBehaviour
         PhotonNetwork.Disconnect();
         while (PhotonNetwork.IsConnected)
             yield return null;
-        //LobbyManager.instance.inroom = true;
-        SceneManager.LoadScene("Party");
-       
+        SceneManager.LoadScene("Party");       
 
     }
     public IEnumerator LevelStart()

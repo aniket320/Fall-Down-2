@@ -8,6 +8,7 @@ TagManager:
   - spawnner
   - faller
   - Bouncer
+  - RespawnPos
   layers:
   - Default
   - TransparentFX

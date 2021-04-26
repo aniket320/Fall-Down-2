@@ -12,13 +12,15 @@ public class Controll : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            Debug.Log("thisinstance");
         }
         else
         {
+            Debug.Log("destroy");
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 

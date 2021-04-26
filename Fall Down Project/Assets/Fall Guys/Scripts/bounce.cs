@@ -27,8 +27,8 @@ public class bounce : MonoBehaviour
      {
          if (other.gameObject.CompareTag("Bouncer"))
          {
-             rb.AddForce(Vector3.back *  150);
-            rb.AddForce(Vector3.up * 100);
+            rb.AddForce(Vector3.back * 2, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * 3, ForceMode.Impulse);
              
          }
      }
