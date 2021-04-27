@@ -83,11 +83,11 @@ public class ColorPaletteController : MonoBehaviour, IBeginDragHandler, IDragHan
     public HueChangeEvent OnHueChange;
 
     // Start is called before the first frame update
-    void Awake()
+    void LateUpdate()
     {
-       // CalculatePresets();
-//UpdateMaterialInitialValues();
-       // UpdateMaterial();
+       CalculatePresets();
+UpdateMaterialInitialValues();
+        //UpdateMaterial();
 //UpdateColor();
     }
     void UpdateMaterialInitialValues()
