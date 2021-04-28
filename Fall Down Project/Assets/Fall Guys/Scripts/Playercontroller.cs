@@ -8,6 +8,7 @@ using TMPro;
 
 public class Playercontroller : MonoBehaviourPun,IPunObservable
 {
+    public static Playercontroller instance;
     [SerializeField] private PhotonView photonview;
     [SerializeField] private float smoothRottime;
     [SerializeField] private float speed;
@@ -18,6 +19,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     [SerializeField] private GameObject thirdpersonCamera;
     [SerializeField] private bool firstPlayer;
     [SerializeField] private TMP_Text PlayerNameText;
+    public bool canMove;
     Rigidbody rb;
     float currentvelocity;
     float GroundSphereRadius = 0.1f;
@@ -39,9 +41,17 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     void Start()
     {
         //GameManager.instace.WinPanel.SetActive(false);
+        if(instance == null)
+        {
+            instance = this;
+        }
+
         firstPlayer = false;
+        canMove = true;
+
         rb = GetComponent<Rigidbody>();
         Camera = GameObject.Find("Main Camera");
+
         if (photonview.IsMine)
         {
             thirdpersonCamera.SetActive(true);
@@ -58,6 +68,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     {
         if(photonView.IsMine) 
         {
+            if(canMove)
             playerMove();
             PlayerPrefs.GetString("UserName");
             
@@ -147,8 +158,6 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
                 //GameManager.instace.coroutineCall();
 
                 //GameManager.instace.NoOfPlayerQualified++;
-
-
             }
         //}
 

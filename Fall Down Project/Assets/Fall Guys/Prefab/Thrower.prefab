@@ -405,7 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6150499108325019762}
   - component: {fileID: 3950855250724355565}
-  - component: {fileID: 37070982135964158}
+  - component: {fileID: 4027991703437949100}
   m_Layer: 8
   m_Name: Thrower
   m_TagString: Untagged
@@ -442,21 +442,20 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.25
-  m_Height: 15.57
+  m_Radius: 0.5
+  m_Height: 13.71
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &37070982135964158
-CapsuleCollider:
+--- !u!114 &4027991703437949100
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6041949104871234559}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.52
-  m_Height: 14.68
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.51, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f5cb35b1ed43064d9ff8d46631b070e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunnedtime: 0.7

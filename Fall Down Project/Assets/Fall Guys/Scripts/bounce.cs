@@ -6,34 +6,28 @@ using UnityEngine;
 
 public class bounce : MonoBehaviour
 {
-
-  
-
-    private Rigidbody rb;
-
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-        //generate vector in the direction of jump pad's y axis multiplied with a factor jumpForce
-
-    }
-
+    Vector3 backwardDir;
+    [SerializeField] private float stunnedtime = .5f;
     void OnCollisionEnter(Collision other)
-     {
-         if (other.gameObject.CompareTag("Bouncer"))
-         {
-            rb.AddForce(Vector3.back * 2, ForceMode.Impulse);
-            rb.AddForce(Vector3.up * 3, ForceMode.Impulse);
-             
-         }
+    {
+        foreach(ContactPoint c in other.contacts)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+               Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+                backwardDir = c.normal;
+                StartCoroutine(PlayerStunned());
+                rb.velocity = ( -backwardDir * 3 ) +(Vector3.up * 2);
+                
+            }
+        }         
      }
+    IEnumerator PlayerStunned()
+    {
+        Playercontroller.instance.canMove = false;
+        yield return new WaitForSeconds(stunnedtime);
+        Playercontroller.instance.canMove = true;
+    }
 
-    
-    
 
 }
