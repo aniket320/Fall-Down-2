@@ -9,6 +9,7 @@ TagManager:
   - faller
   - Bouncer
   - RespawnPos
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - IgnorebyNavmesh
   - 
   - 
   - 

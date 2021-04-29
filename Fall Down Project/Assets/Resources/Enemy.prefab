@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2525371956469482655}
   - component: {fileID: 6566620454993887530}
   - component: {fileID: 6209708156713454285}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,13 +143,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1027844613886690830}
   - component: {fileID: 1027844613886690832}
-  - component: {fileID: 1027844613886690833}
+  - component: {fileID: 772941781083988540}
   - component: {fileID: 3761033514733414388}
   - component: {fileID: 1583396347178976341}
-  - component: {fileID: -8038462592692822546}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  - component: {fileID: 1694153842396730998}
+  m_Layer: 9
+  m_Name: Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,12 +179,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027844613886690829}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cfc83ed55ac5b1428bed9536e36cedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonview: {fileID: 1027844613886690833}
+  photonview: {fileID: 0}
   smoothRottime: 0.1
   speed: 5
   JumpForce: 200
@@ -196,7 +196,8 @@ MonoBehaviour:
   thirdpersonCamera: {fileID: 1027844615154810959}
   firstPlayer: 0
   PlayerNameText: {fileID: 6209708156713454285}
---- !u!114 &1027844613886690833
+  canMove: 0
+--- !u!114 &772941781083988540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -205,20 +206,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1027844613886690829}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: c0361c25b3e687e44abe2ac7243d07d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 0
-  ObservedComponents:
-  - {fileID: 1027844613886690832}
-  sceneViewId: 1
-  InstantiationId: -1
-  isRuntimeInstantiated: 0
+  agent: {fileID: 0}
+  FinishLine: {fileID: 0}
 --- !u!54 &3761033514733414388
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -249,18 +241,28 @@ CapsuleCollider:
   m_Height: 0.87
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8038462592692822546
-MonoBehaviour:
+--- !u!195 &1694153842396730998
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027844613886690829}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f5cb35b1ed43064d9ff8d46631b070e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_Radius: 0.26
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.86
+  m_BaseOffset: 0.42
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1027844614383572743
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +274,7 @@ GameObject:
   - component: {fileID: 1027844614383572744}
   - component: {fileID: 1027844614383572746}
   - component: {fileID: 1027844614383572745}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1027844615154810962}
   - component: {fileID: 1027844615154810961}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThirdPersonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +490,7 @@ GameObject:
   - component: {fileID: 8784925101902469149}
   - component: {fileID: 8088136804211769146}
   - component: {fileID: 4510842852074570642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -581,7 +583,7 @@ GameObject:
   - component: {fileID: 5484851197423378701}
   - component: {fileID: 8621481437446588832}
   - component: {fileID: 7555578808135457146}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +706,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5495689761570264702}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +737,7 @@ GameObject:
   m_Component:
   - component: {fileID: 207426591033692736}
   - component: {fileID: 8095224830028225319}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TopRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -811,7 +813,7 @@ GameObject:
   - component: {fileID: 474266299679068059}
   - component: {fileID: 8128854251212291279}
   - component: {fileID: 6606434014867123138}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -938,7 +940,7 @@ GameObject:
   - component: {fileID: 5675587456851744798}
   - component: {fileID: 3387872994487335500}
   - component: {fileID: 770417347062358681}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1050,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2705750489980904894}
   - component: {fileID: 7705247021604060351}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BottomRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,7 +1126,7 @@ GameObject:
   - component: {fileID: 1523772819525959833}
   - component: {fileID: 6855442104569788583}
   - component: {fileID: 325815783974958843}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1248,7 +1250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6430308773391631196}
   - component: {fileID: 548209495457599382}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MiddleRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
