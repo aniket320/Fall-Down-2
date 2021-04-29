@@ -195,6 +195,7 @@ MonoBehaviour:
   thirdpersonCamera: {fileID: 1027844615154810959}
   firstPlayer: 0
   PlayerNameText: {fileID: 6209708156713454285}
+  canMove: 0
 --- !u!114 &1027844613886690833
 MonoBehaviour:
   m_ObjectHideFlags: 0
