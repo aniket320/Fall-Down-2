@@ -80,14 +80,14 @@ public class CharacterControls : MonoBehaviour {
 				velocityChange.y = 0;
 				if (!slide)
 				{
-					if (Mathf.Abs(rb.velocity.magnitude) < speed * 1.0f)
-						rb.AddForce(velocityChange, ForceMode.VelocityChange);
-				}
+                    //if (Mathf.Abs(rb.velocity.magnitude) < speed * 1.0f)
+                    //rb.AddForce(velocityChange, ForceMode.VelocityChange);
+                }
 				else if (Mathf.Abs(rb.velocity.magnitude) < speed * 1.0f)
 				{
-					rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
-					//Debug.Log(rb.velocity.magnitude);
-				}
+                    rb.AddForce(moveDir * 0.15f, ForceMode.VelocityChange);
+                    //Debug.Log(rb.velocity.magnitude);
+                }
 
 				// Jump
 				if (IsGrounded() && Input.GetButton("Jump"))

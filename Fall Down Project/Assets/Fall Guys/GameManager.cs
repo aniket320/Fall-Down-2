@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instace;
     public GameObject PlayerPrefab; 
+    public GameObject EnemyPrefab;
     //[SerializeField] private GameObject MainMenu;
     public GameObject WinPanel;
     public TMP_Text WinnernameText;
@@ -16,13 +17,22 @@ public class GameManager : MonoBehaviour
     //public int NoOfPlayerCanQualifie;
     //public int NoOfPlayerQualified;
     public GameObject instatiatepos;
-    
-
+    public bool firstPlayer;
+    public TMP_Text GameStartComeDowntext;
+    public int GameStartComeDown;
+    private float starttime;
+    bool comeDownStart = true;
     //public GameObject[] QualifiedPlayer;
 
-
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
+        starttime = GameStartComeDown;
+        EnemyAI.instance.agent.isStopped = true;
+
         if (instace == null)
         {
             instace = this;
@@ -50,6 +60,21 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        if (comeDownStart)
+        {
+            starttime -= Time.deltaTime;
+            GameStartComeDown = Mathf.RoundToInt(starttime);
+            GameStartComeDowntext.text = GameStartComeDown.ToString();
+            if (GameStartComeDown <= 0)
+            {
+                GameStartComeDowntext.text = "Go!";
+                Playercontroller.instance.canMove = true;
+                EnemyAI.instance.agent.isStopped = false;
+                comeDownStart = false;
+
+            }
+        }
+       
         //if(NoOfPlayerQualified == NoOfPlayerCanQualifie)
         //{
         //    //FinishPanel.SetActive(true);

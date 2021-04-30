@@ -2356,6 +2356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loding: {fileID: 812931237}
   JoinGameInputField: {fileID: 1960841224}
+  waitingforOtherPlayerPanel: {fileID: 0}
   RoomNo: {fileID: 453662054}
   connectingPanel: {fileID: 1099533083}
   inRoom: {fileID: 215975511}
@@ -9946,6 +9947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loding: {fileID: 1099533083}
   JoinGameInputField: {fileID: 1960841224}
+  waitingforOtherPlayerPanel: {fileID: 0}
   RoomNo: {fileID: 453662054}
   connectingPanel: {fileID: 1099533083}
   inRoom: {fileID: 215975511}
@@ -12047,7 +12049,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629211033}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1968756303}

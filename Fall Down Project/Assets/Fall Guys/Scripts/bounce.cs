@@ -7,6 +7,8 @@ using UnityEngine;
 public class bounce : MonoBehaviour
 {
     Vector3 backwardDir;
+    [SerializeField] private float backwardForce = 3f;
+    [SerializeField] private float UpwardForce = 2f;
     [SerializeField] private float stunnedtime = .5f;
     void OnCollisionEnter(Collision other)
     {
@@ -23,6 +25,7 @@ public class bounce : MonoBehaviour
             {
                 Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
                 backwardDir = c.normal;
+                StartCoroutine(EnemyStunned());
                 rb.velocity = (-backwardDir * 3) + (Vector3.up * 2);
             }
         }         

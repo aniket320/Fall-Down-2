@@ -16,13 +16,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //[SerializeField] private TMP_InputField UserNameInputField;
     [SerializeField] private TMP_InputField JoinGameInputField;
     //[SerializeField] private TMP_InputField CreateGameInputField;
-    //[SerializeField] private GameObject StartButton;
+    [SerializeField] private GameObject waitingforOtherPlayerPanel;
     [SerializeField] private TextMeshProUGUI RoomNo;
     [SerializeField] private GameObject connectingPanel;
     [SerializeField] private GameObject inRoom;
     [SerializeField] private Transform PlayerListCount;
     [SerializeField] private GameObject PlayerListPrefab;
     [SerializeField] private GameObject Playbtn;
+    
 
     private void Awake()
     {
@@ -139,6 +140,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public void Play()
     {
+        waitingforOtherPlayerPanel.SetActive(true);
+
         PhotonNetwork.LoadLevel(2);
     }
     public override void OnJoinRoomFailed(short returnCode, string message)

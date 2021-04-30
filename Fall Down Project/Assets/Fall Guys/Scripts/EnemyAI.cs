@@ -10,10 +10,10 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
 {
     public static EnemyAI instance;
     //[SerializeField] private PhotonView photonview;
-    [SerializeField] private NavMeshAgent agent;
+    public NavMeshAgent agent;
     [SerializeField] private GameObject FinishLine;
     public GameObject[] destination; int i = 0;
-    public bool canMove = true;
+    public bool canMove;
     //[SerializeField] private float smoothRottime;
     //[SerializeField] private float speed;
     //[SerializeField] private float JumpForce = 100f;
@@ -21,8 +21,7 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     //[SerializeField] private LayerMask GroundLayer;
     //[SerializeField] private Transform Groundpos;
     //[SerializeField] private GameObject thirdpersonCamera;
-    //[SerializeField] private bool firstPlayer;
-    //[SerializeField] private TMP_Text PlayerNameText;
+    [SerializeField] private TMP_Text EnemyNameText;
     //public bool canMove;
     //Rigidbody rb;
     //float currentvelocity;
@@ -45,6 +44,7 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     void Start()
     {
         canMove = true;
+        EnemyNameText.text = "FallDown#" + Random.Range(0000, 9999);
         destination = GameObject.FindGameObjectsWithTag("Destination");
         //destination = new List<GameObject>();
         foreach(Transform t in transform)
@@ -96,7 +96,8 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
 
         if (canMove)
         {
-            agent.SetDestination(destination[i].transform.position);
+            if(GameManager.instace.firstPlayer) agent.isStopped = true;
+            agent.SetDestination(destination[i].transform.position);         
             if (transform.position.z >= destination[i].transform.position.z)
             {
                 //Destroy(destination[i]);
@@ -104,10 +105,16 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
                 if (i >= destination.Length)
                     canMove = false;
             }
+
+    //    if (this.transform.position.y <= -15f)
+    //    {
+    //    Destroy(this.gameObject);
+    //    PhotonNetwork.Instantiate(GameManager.instace.EnemyPrefab.name, GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
+         //}
         }
-           
-        
-    
+
+
+
     }
     //private void LateUpdate()
     //{
@@ -129,9 +136,9 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
 
     //    if (this.transform.position.y <= -15f)
     //    {
-    //        Destroy(this.gameObject);
-    //        PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name, GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
-    //    }
+    //    Destroy(this.gameObject);
+    //    PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name, GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
+    ////}
 
     //    float x = /*Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
     //    float y = /*Input.GetAxis("Vertical") ||*/ joystick.Vertical;
@@ -168,26 +175,26 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     //    }
     //}
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    //if (GameManager.instace.NoOfPlayerQualified <= GameManager.instace.NoOfPlayerCanQualifie)
-    //    //{
-    //    if (other.CompareTag("Finishline"))
-    //    {
-    //        firstPlayer = true;
-    //        if (firstPlayer)
-    //        {
-    //            GameManager.instace.WinPanel.SetActive(true);
-    //            GameManager.instace.WinnernameText.text = " Winner: " + PhotonNetwork.NickName;
-    //            //PhotonNetwork.Destroy(this.gameObject);
-    //        }
-    //        //if (photonview.IsMine)
-    //        //GameManager.instace.coroutineCall();
+    private void OnTriggerEnter(Collider other)
+    {
+        //if (GameManager.instace.NoOfPlayerQualified <= GameManager.instace.NoOfPlayerCanQualifie)
+        //{
+        if (other.CompareTag("Finishline"))
+        {
+            GameManager.instace.firstPlayer = true;
+            if (GameManager.instace.firstPlayer)
+            {
+                GameManager.instace.WinPanel.SetActive(true);
+                GameManager.instace.WinnernameText.text = " Winner: " + EnemyNameText.text;
+                //PhotonNetwork.Destroy(this.gameObject);
+            }
+            //if (photonview.IsMine)
+            //GameManager.instace.coroutineCall();
 
-    //        //GameManager.instace.NoOfPlayerQualified++;
-    //    }
-    //    //}
+            //GameManager.instace.NoOfPlayerQualified++;
+        }
+        //}
 
-    //}
+    }
 
 }

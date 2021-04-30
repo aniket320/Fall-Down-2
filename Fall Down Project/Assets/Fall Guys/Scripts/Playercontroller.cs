@@ -17,7 +17,6 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private Transform Groundpos;
     [SerializeField] private GameObject thirdpersonCamera;
-    [SerializeField] private bool firstPlayer;
     [SerializeField] private TMP_Text PlayerNameText;
     public bool canMove;
     Rigidbody rb;
@@ -46,8 +45,6 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             instance = this;
         }
 
-        firstPlayer = false;
-        canMove = true;
 
         rb = GetComponent<Rigidbody>();
         Camera = GameObject.Find("Main Camera");
@@ -147,8 +144,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         //{
             if (other.CompareTag("Finishline"))
             {
-                firstPlayer = true;
-                if (firstPlayer)
+                GameManager.instace.firstPlayer = true;
+                if (GameManager.instace.firstPlayer)
                 {
                     GameManager.instace.WinPanel.SetActive(true);
                     GameManager.instace.WinnernameText.text = " Winner: " + PhotonNetwork.NickName;
