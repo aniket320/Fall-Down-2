@@ -6114,22 +6114,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1062422288
-MonoBehaviour:
+--- !u!208 &1062422288
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062422282}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2777bba7e4e7c6f4681e3ea77eef5438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Size: {x: 4, y: 3, z: 4}
-  m_Center: {x: 0, y: 1, z: 0}
-  m_Area: 0
-  m_AffectedAgents: ffffffff
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &1094579335
 GameObject:
   m_ObjectHideFlags: 0
@@ -11621,8 +11621,8 @@ GameObject:
   - component: {fileID: 1957304957}
   - component: {fileID: 1957304956}
   - component: {fileID: 1957304960}
-  - component: {fileID: 1957304961}
   - component: {fileID: 1957304962}
+  - component: {fileID: 1957304961}
   m_Layer: 8
   m_Name: wall
   m_TagString: Untagged
@@ -11723,22 +11723,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1957304961
-MonoBehaviour:
+--- !u!208 &1957304961
+NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1957304955}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2777bba7e4e7c6f4681e3ea77eef5438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Size: {x: 4, y: 3, z: 4}
-  m_Center: {x: 0, y: 1, z: 0}
-  m_Area: 0
-  m_AffectedAgents: ffffffff
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!114 &1957304962
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("gaemMeaga");
         if (instace == null)
         {
             instace = this;

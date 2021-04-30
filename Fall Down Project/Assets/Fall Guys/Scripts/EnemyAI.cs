@@ -12,7 +12,8 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     //[SerializeField] private PhotonView photonview;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject FinishLine;
-    public GameObject[] destination; int i = 0; bool canMove = true;
+    public GameObject[] destination; int i = 0;
+    public bool canMove = true;
     //[SerializeField] private float smoothRottime;
     //[SerializeField] private float speed;
     //[SerializeField] private float JumpForce = 100f;
@@ -51,10 +52,10 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
             //destination.add
         }
         ////GameManager.instace.WinPanel.SetActive(false);
-        //if (instance == null)
-        //{
-        //    instance = this;
-        //}
+        if (instance == null)
+        {
+            instance = this;
+        }
 
         //firstPlayer = false;
         //canMove = true;

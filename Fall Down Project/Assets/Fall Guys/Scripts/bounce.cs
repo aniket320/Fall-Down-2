@@ -12,13 +12,18 @@ public class bounce : MonoBehaviour
     {
         foreach(ContactPoint c in other.contacts)
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player") )
             {
                Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
                 backwardDir = c.normal;
                 StartCoroutine(PlayerStunned());
-                rb.velocity = ( -backwardDir * 3 ) +(Vector3.up * 2);
-                
+                rb.velocity = ( -backwardDir * 3 ) +(Vector3.up * 2);                
+            }
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
+                backwardDir = c.normal;
+                rb.velocity = (-backwardDir * 3) + (Vector3.up * 2);
             }
         }         
      }
@@ -28,6 +33,11 @@ public class bounce : MonoBehaviour
         yield return new WaitForSeconds(stunnedtime);
         Playercontroller.instance.canMove = true;
     }
-
+    IEnumerator EnemyStunned()
+    {
+        EnemyAI.instance.canMove = false;
+        yield return new WaitForSeconds(stunnedtime);
+        EnemyAI.instance.canMove = true;
+    }
 
 }
