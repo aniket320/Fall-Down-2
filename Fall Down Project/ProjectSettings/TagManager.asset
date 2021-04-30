@@ -10,6 +10,9 @@ TagManager:
   - Bouncer
   - RespawnPos
   - Enemy
+  - Slide
+  - Wall
+  - Destination
   layers:
   - Default
   - TransparentFX

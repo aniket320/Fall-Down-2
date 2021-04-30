@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     //[SerializeField] private PhotonView photonview;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private GameObject FinishLine;
+    public GameObject[] destination; int i = 0; bool canMove = true;
     //[SerializeField] private float smoothRottime;
     //[SerializeField] private float speed;
     //[SerializeField] private float JumpForce = 100f;
@@ -42,6 +43,13 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     //}
     void Start()
     {
+        canMove = true;
+        destination = GameObject.FindGameObjectsWithTag("Destination");
+        //destination = new List<GameObject>();
+        foreach(Transform t in transform)
+        {
+            //destination.add
+        }
         ////GameManager.instace.WinPanel.SetActive(false);
         //if (instance == null)
         //{
@@ -84,8 +92,21 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     }
     private void Update()
     {
-        agent.SetDestination(FinishLine.transform.position);
 
+        if (canMove)
+        {
+            agent.SetDestination(destination[i].transform.position);
+            if (transform.position.z >= destination[i].transform.position.z)
+            {
+                //Destroy(destination[i]);
+                i++;
+                if (i >= destination.Length)
+                    canMove = false;
+            }
+        }
+           
+        
+    
     }
     //private void LateUpdate()
     //{

@@ -15,7 +15,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject loding;
     //[SerializeField] private TMP_InputField UserNameInputField;
     [SerializeField] private TMP_InputField JoinGameInputField;
-    [SerializeField] private TMP_InputField CreateGameInputField;
+    //[SerializeField] private TMP_InputField CreateGameInputField;
     //[SerializeField] private GameObject StartButton;
     [SerializeField] private TextMeshProUGUI RoomNo;
     [SerializeField] private GameObject connectingPanel;
@@ -45,10 +45,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //    UserNameMenu.SetActive(false);
     //}
 
-    public void connect()
-    {
-        PhotonNetwork.ConnectUsingSettings();
-    }
+    //public void connect()
+    //{
+    //    PhotonNetwork.ConnectUsingSettings();
+    //}
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);

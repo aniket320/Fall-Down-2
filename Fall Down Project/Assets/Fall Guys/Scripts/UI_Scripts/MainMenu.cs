@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+        //PhotonNetwork.AutomaticallySyncScene = true;
            
     }
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class MainMenu : MonoBehaviour
     }
     private void LateUpdate()
     {
-            UsernamesDisplay.text = PlayerPrefs.GetString("UserName");
+       UsernamesDisplay.text = PlayerPrefs.GetString("UserName");
     }
     public void Play()
     {
@@ -53,20 +53,18 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
         Debug.Log("isquit");
     }  
+
     //public void Username()
     //{
     //    names.text = UserName.text;
     //}
 
     public void saveUsername()
-    {
-       
+    {      
 
-       PlayerPrefs.SetString("UserName",PhotonNetwork.NickName = UserName.text);
-      
+       PlayerPrefs.SetString("UserName",PhotonNetwork.NickName = UserName.text);     
 
     }
-
 
     /*public float SetVolume(float volume)
     {
