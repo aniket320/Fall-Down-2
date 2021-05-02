@@ -1184,13 +1184,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 1027844613886690829, guid: 223a0c2f677476e4cbb3db00f1e523e4,
     type: 3}
-  EnemyPrefab: {fileID: 0}
+  EnemyPrefab: {fileID: 1027844613886690829, guid: c6ee87b106e22ed47a53f87a4cad7356,
+    type: 3}
   WinPanel: {fileID: 1799874502816992335}
   WinnernameText: {fileID: 4142354080477217763}
   instatiatepos: {fileID: 0}
   firstPlayer: 0
   GameStartComeDowntext: {fileID: 2319858891672873426}
   GameStartComeDown: 5
+  comeDownOver: 0
 --- !u!1 &8895956497097112580
 GameObject:
   m_ObjectHideFlags: 0

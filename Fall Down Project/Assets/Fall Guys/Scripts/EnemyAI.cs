@@ -44,6 +44,7 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     void Start()
     {
         canMove = true;
+     
         EnemyNameText.text = "FallDown#" + Random.Range(0000, 9999);
         destination = GameObject.FindGameObjectsWithTag("Destination");
         //destination = new List<GameObject>();
@@ -62,6 +63,8 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
 
         //rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        agent.isStopped = false;
+
         //FinishLine = GameObject.FindGameObjectWithTag("Finishline");
         //Camera = GameObject.Find("Main Camera");
 
@@ -94,7 +97,7 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
     private void Update()
     {
 
-        if (canMove)
+        if (canMove && GameManager.instace.comeDownOver)
         {
             if(GameManager.instace.firstPlayer) agent.isStopped = true;
             agent.SetDestination(destination[i].transform.position);         
@@ -103,14 +106,19 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
                 //Destroy(destination[i]);
                 i++;
                 if (i >= destination.Length)
+                {
+                    agent.isStopped = true;
                     canMove = false;
+                }
+                    
+
             }
 
-    //    if (this.transform.position.y <= -15f)
-    //    {
-    //    Destroy(this.gameObject);
-    //    PhotonNetwork.Instantiate(GameManager.instace.EnemyPrefab.name, GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
-         //}
+            if (this.transform.position.y <= -15f)
+            {
+                Destroy(this.gameObject);
+                PhotonNetwork.Instantiate(GameManager.instace.EnemyPrefab.name, GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
+            }
         }
 
 
@@ -184,6 +192,8 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
             GameManager.instace.firstPlayer = true;
             if (GameManager.instace.firstPlayer)
             {
+                agent.isStopped = true;
+                Playercontroller.instance.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
                 GameManager.instace.WinPanel.SetActive(true);
                 GameManager.instace.WinnernameText.text = " Winner: " + EnemyNameText.text;
                 //PhotonNetwork.Destroy(this.gameObject);

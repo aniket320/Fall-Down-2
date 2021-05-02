@@ -17,11 +17,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_InputField JoinGameInputField;
     //[SerializeField] private TMP_InputField CreateGameInputField;
     [SerializeField] private GameObject waitingforOtherPlayerPanel;
+    [SerializeField] private TMP_Text waitingforOtherPlayer_text;
+    [SerializeField] private int NumberOfPlayerTAdd = 1;
     [SerializeField] private TextMeshProUGUI RoomNo;
     [SerializeField] private GameObject connectingPanel;
     [SerializeField] private GameObject inRoom;
     [SerializeField] private Transform PlayerListCount;
     [SerializeField] private GameObject PlayerListPrefab;
+    [SerializeField] private GameObject EnemyListPrefab;
     [SerializeField] private GameObject Playbtn;
     
 
@@ -132,7 +135,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             Instantiate(PlayerListPrefab, PlayerListCount).GetComponent<PlayerListCount>().setup(players[i]);
         }
         Playbtn.SetActive(PhotonNetwork.IsMasterClient);
-      
+        Debug.Log(players.Count());
     }
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
@@ -141,8 +144,25 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void Play()
     {
         waitingforOtherPlayerPanel.SetActive(true);
+        StartCoroutine(SceneLoad());
 
+    }
+    private void Update()
+    {
+        Playbtn.SetActive(PhotonNetwork.IsMasterClient);
+            waitingforOtherPlayer_text.text = "Finding Other Players: " + PhotonNetwork.PlayerList.Count()+ "/20";
+
+
+    }
+    IEnumerator SceneLoad()
+    {
+        yield return new WaitForSeconds(3);
+        for (int i = PhotonNetwork.PlayerList.Count(); i <= 20; i++)
+        {
+            NumberOfPlayerTAdd ++;
+        }
         PhotonNetwork.LoadLevel(2);
+
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {

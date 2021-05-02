@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5cb35b1ed43064d9ff8d46631b070e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backwardForce: 3
+  UpwardForce: 2
   stunnedtime: 0.5
 --- !u!114 &7810787420311132855
 MonoBehaviour:
@@ -134,7 +136,7 @@ GameObject:
   - component: {fileID: 5129698436081256330}
   - component: {fileID: 5129698436081256333}
   - component: {fileID: 5129698436081256332}
-  - component: {fileID: 3853197359384717695}
+  - component: {fileID: 4999852243863916185}
   m_Layer: 8
   m_Name: rotator 02
   m_TagString: Untagged
@@ -204,8 +206,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3853197359384717695
-BoxCollider:
+--- !u!64 &4999852243863916185
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -214,9 +216,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1.0000001}
-  m_Center: {x: 0.00000011920929, y: -0.0000009536743, z: 0.0000003874302}
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5129698436460009796
 GameObject:
   m_ObjectHideFlags: 0

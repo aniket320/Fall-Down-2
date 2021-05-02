@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using Photon.Pun;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     public int GameStartComeDown;
     private float starttime;
     bool comeDownStart = true;
+    public bool comeDownOver = false;
     //public GameObject[] QualifiedPlayer;
 
     private void Awake()
@@ -30,15 +32,17 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        
         starttime = GameStartComeDown;
-        EnemyAI.instance.agent.isStopped = true;
-
+        comeDownOver = false;
         if (instace == null)
         {
             instace = this;
         }
-        //else Destroy(gameObject);
-        //DontDestroyOnLoad(gameObject);
+        for (int i = PhotonNetwork.PlayerList.Count(); i <= 20; i++)
+        {
+            PhotonNetwork.Instantiate(EnemyPrefab.name, instatiatepos.transform.position, Quaternion.identity, 0);
+        }
 
         instatiatepos = GameObject.FindGameObjectWithTag("RespawnPos");
         PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity,0);
@@ -68,11 +72,11 @@ public class GameManager : MonoBehaviour
             if (GameStartComeDown <= 0)
             {
                 GameStartComeDowntext.text = "Go!";
-                Playercontroller.instance.canMove = true;
-                EnemyAI.instance.agent.isStopped = false;
                 comeDownStart = false;
-
+                comeDownOver = true;
+                Invoke("ComeDowntextDisable", 1);
             }
+            
         }
        
         //if(NoOfPlayerQualified == NoOfPlayerCanQualifie)
@@ -80,6 +84,11 @@ public class GameManager : MonoBehaviour
         //    //FinishPanel.SetActive(true);
         //    //StartCoroutine(NextLevel());
         //}
+    }
+    private void ComeDowntextDisable()
+    {
+        GameStartComeDowntext.gameObject.SetActive(false);
+
     }
     //public void SpawnPlayer()
     //{
@@ -109,6 +118,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Party");       
 
     }
+    
     public IEnumerator LevelStart()
     {
         yield return new WaitForSeconds(2);

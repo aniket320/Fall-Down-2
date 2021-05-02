@@ -39,6 +39,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     }
     void Start()
     {
+        canMove = true;
         //GameManager.instace.WinPanel.SetActive(false);
         if(instance == null)
         {
@@ -65,7 +66,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     {
         if(photonView.IsMine) 
         {
-            if(canMove)
+            if(canMove && GameManager.instace.comeDownOver)
             playerMove();
             PlayerPrefs.GetString("UserName");
             
@@ -148,6 +149,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
                 if (GameManager.instace.firstPlayer)
                 {
                     GameManager.instace.WinPanel.SetActive(true);
+                rb.constraints = RigidbodyConstraints.FreezePosition;
                     GameManager.instace.WinnernameText.text = " Winner: " + PhotonNetwork.NickName;
                     //PhotonNetwork.Destroy(this.gameObject);
                 }

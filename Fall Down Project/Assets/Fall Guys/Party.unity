@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -922,7 +922,7 @@ RectTransform:
   m_Children:
   - {fileID: 1901451064}
   m_Father: {fileID: 1432570724}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3304,8 +3304,8 @@ RectTransform:
   - {fileID: 2055462361}
   - {fileID: 240410101}
   - {fileID: 1291971693}
-  - {fileID: 283443853}
   - {fileID: 1524899902}
+  - {fileID: 283443853}
   - {fileID: 463461232}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -3650,7 +3650,7 @@ RectTransform:
   - {fileID: 1952520818}
   - {fileID: 568554271}
   m_Father: {fileID: 1432570724}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5067,12 +5067,15 @@ MonoBehaviour:
   loding: {fileID: 1380150219}
   JoinGameInputField: {fileID: 652992210}
   waitingforOtherPlayerPanel: {fileID: 283443852}
+  waitingforOtherPlayer_text: {fileID: 1901451065}
+  totalPlayerinLobbyCount: 0
   RoomNo: {fileID: 1952520820}
   connectingPanel: {fileID: 463461231}
   inRoom: {fileID: 1524899901}
   PlayerListCount: {fileID: 1685604863}
   PlayerListPrefab: {fileID: 911991450368176419, guid: 5318aee9231d55146a556c315c318cb7,
     type: 3}
+  EnemyListPrefab: {fileID: 0}
   Playbtn: {fileID: 102909213}
 --- !u!4 &1959497370
 Transform:
