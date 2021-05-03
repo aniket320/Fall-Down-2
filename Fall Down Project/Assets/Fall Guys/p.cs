@@ -5,34 +5,21 @@ using UnityEngine;
 public class p : MonoBehaviour
 {
     public Material mat;
-    public FlexibleColorPicker fcp;
+    
 
-    private void Update()
+    private void Start()
     {
-        mat.color = fcp.color;
+        mat.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
+
 
     }
 
     //save code
 
-    private void OnDisable()
-    {
-        string saveColor = ColorUtility.ToHtmlStringRGB(fcp.color);
-        PlayerPrefs.SetString("MyColorValue", saveColor);
-    }
+   
 
     //load code
 
-    private void OnEnable()
-    {
-        string saveColor = PlayerPrefs.GetString("MyColorValue");
-        Color color;
-        if (ColorUtility.TryParseHtmlString(saveColor, out color))
-            
-        
-            fcp.color = color;
-        
-    }
 
 
 }

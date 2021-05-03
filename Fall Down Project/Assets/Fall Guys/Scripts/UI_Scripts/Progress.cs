@@ -12,33 +12,51 @@ public class Progress : MonoBehaviour
 
     public Slider slider;
 
-    
+    void Awake()
+    {
+        if (PlayerPrefs.HasKey("music"))
+        {
 
-    public void UpdateProgress()
+            Load();
+        }
+    }
+public void UpdateProgress()
     {
         progress++;
         slider.value = progress;
-    }
-/*
-    public Text obj_text;
-    public InputField display;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        obj_text.text = PlayerPrefs.GetString("username");
+       Save();
     }
 
-    public void Create()
-    {
-        obj_text.text = display.text;
-        PlayerPrefs.SetString("username", obj_text.text);
-        PlayerPrefs.Save();
-    }
 
-    // Update is called once per frame
-    void Update()
+   private void Load()
     {
-        
-    }*/
+        slider.value = PlayerPrefs.GetFloat("progress");
+    }
+    private void Save()
+    {
+        PlayerPrefs.SetFloat("progress", slider.value);
+
+    }
+    /*
+        public Text obj_text;
+        public InputField display;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            obj_text.text = PlayerPrefs.GetString("username");
+        }
+
+        public void Create()
+        {
+            obj_text.text = display.text;
+            PlayerPrefs.SetString("username", obj_text.text);
+            PlayerPrefs.Save();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }*/
 }

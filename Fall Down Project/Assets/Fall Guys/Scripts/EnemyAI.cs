@@ -48,7 +48,9 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
         EnemyNameText.text = "FallDown#" + Random.Range(0000, 9999);
         destination = GameObject.FindGameObjectsWithTag("Destination");
         //destination = new List<GameObject>();
-        foreach(Transform t in transform)
+       
+
+        foreach (Transform t in transform)
         {
             //destination.add
         }

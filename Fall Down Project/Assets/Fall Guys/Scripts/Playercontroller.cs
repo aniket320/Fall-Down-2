@@ -28,7 +28,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     bool isGrounded;
     Vector3 smoothdamp;
     Quaternion smoothRotation;
-    
+    private Animator anim;
+    public Animator ani;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -96,18 +97,25 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime,ForceMode.Impulse);
+            GetComponent<Animator>().Play("jump");
+
         }
 
         if (this.transform.position.y <= -15f)
         {
            Destroy(this.gameObject);
            PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name,GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
+
         }
+        
+            float x = /*Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
+            float y = /*Input.GetAxis("Vertical") ||*/ joystick.Vertical;
+            Vector3 direction = new Vector3(x, 0, y);
+       
 
-        float x = /*Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
-        float y = /*Input.GetAxis("Vertical") ||*/ joystick.Vertical;
 
-        Vector3 direction = new Vector3(x, 0, y);
+
+
 
         if (direction.magnitude >= 0.1f)
         {
@@ -116,13 +124,16 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
             Vector3 moveAngle = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             rb.MovePosition(rb.position + moveAngle * Time.fixedDeltaTime * speed);
-        }        
+            GetComponent<Animator>().Play("run");
+
+        }
     }
     public void JumpButton()
     {
         if (isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
+            GetComponent<Animator>().Play("jump");
         }
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

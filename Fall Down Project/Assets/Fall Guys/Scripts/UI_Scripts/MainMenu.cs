@@ -12,47 +12,55 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject isQuitPanel;
     [SerializeField] private GameObject helpPanel;
     [SerializeField] private GameObject SettingPanel;
-    [SerializeField] private Text percentageText;
     [SerializeField] private TMP_InputField UserName;
     [SerializeField] private TMP_Text UsernamesDisplay;
-
-    // [SerializeField]public AudioMixer audiomixer;
+    public AudioMixer audiomixer;
+        // [SerializeField]public AudioMixer audiomixer;
     // Start is called before the first frame update
     void Start()
     {
-        percentageText = GetComponent<Text>();
-         
-            
+
+
     }
 
 
     private void Awake()
     {
         //PhotonNetwork.AutomaticallySyncScene = true;
-           
+
     }
     // Update is called once per frame
-    void Update()
+    
+     void Update()
     {
         
-    }
-    private void LateUpdate()
-    {
-       UsernamesDisplay.text = PlayerPrefs.GetString("UserName");
+        
+        
+            UsernamesDisplay.text = PlayerPrefs.GetString("UserName");
+
+        
     }
     public void Play()
     {
+        
+        
+           
+           
+
+        
         Debug.Log("Play");
-    }   
+    }
     public void Party()
     {
-        PhotonNetwork.LoadLevel("Party");
+       
+        SceneManager.LoadScene("Party");
+
     }
     public void QuitYes()
     {
         Application.Quit();
         Debug.Log("isquit");
-    }  
+    }
 
     //public void Username()
     //{
@@ -60,20 +68,27 @@ public class MainMenu : MonoBehaviour
     //}
 
     public void saveUsername()
-    {      
-
-       PlayerPrefs.SetString("UserName",PhotonNetwork.NickName = UserName.text);     
+    {
+        
+        PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = UserName.text);
 
     }
 
-    /*public float SetVolume(float volume)
+    public void SetVolume(float volume)
     {
-        audiomixer.SetFloat("volume", volume);
-    }*/
+        audiomixer.SetFloat("menu",volume);
+    }
+    
+
+    // Update is called once per frame
+
+
+    
+    
 
     public void SetQaulity(int qualityIndex)
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+      QualitySettings.SetQualityLevel(qualityIndex);
     }
 
     public void SetFullScreen(bool isFullScreen)
@@ -81,8 +96,7 @@ public class MainMenu : MonoBehaviour
         Screen.fullScreen = isFullScreen;
     }
 
-    public void textvol(float value)
-    {
-        percentageText.text = Mathf.RoundToInt(value * 100) + "%";
-    }
+
+   
+
 }

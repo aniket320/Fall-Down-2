@@ -154,7 +154,7 @@ public class FlexibleColorPicker : MonoBehaviour {
     */
 
     private void Start() {
-       // this.bufferedColor = new BufferedColor(startingColor);
+        this.bufferedColor = new BufferedColor(startingColor);
         canvas = GetComponentInParent<Canvas>();
     }
 
