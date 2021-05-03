@@ -11,7 +11,7 @@ public class Audios : MonoBehaviour
     void Awake()
     {
        
-      if(instance!=null)
+        if(instance!=null)
         {
             Destroy( gameObject);
            

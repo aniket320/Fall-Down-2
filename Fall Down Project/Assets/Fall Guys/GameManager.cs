@@ -32,14 +32,14 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        AudioManager.instance.Play("IngameAudio");
         starttime = GameStartComeDown;
         comeDownOver = false;
         if (instace == null)
         {
             instace = this;
         }
-        for (int i = PhotonNetwork.PlayerList.Count(); i <= 20; i++)
+        for (int i = PhotonNetwork.PlayerList.Count(); i < 10; i++)
         {
             PhotonNetwork.Instantiate(EnemyPrefab.name, instatiatepos.transform.position, Quaternion.identity, 0);
         }

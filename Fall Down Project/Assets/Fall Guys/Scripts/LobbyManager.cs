@@ -155,14 +155,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void Update()
     {
         Playbtn.SetActive(PhotonNetwork.IsMasterClient);
-            waitingforOtherPlayer_text.text = "Finding Other Players: " + PhotonNetwork.PlayerList.Count()+ "/20";
+            //waitingforOtherPlayer_text.text = "Finding Other Players: " + PhotonNetwork.PlayerList.Count()+ "/20";
 
 
     }
     IEnumerator SceneLoad()
     {
         yield return new WaitForSeconds(3);
-        for (int i = PhotonNetwork.PlayerList.Count(); i <= 20; i++)
+        for (int i = PhotonNetwork.PlayerList.Count(); i <= 10; i++)
         {
             NumberOfPlayerTAdd ++;
         }

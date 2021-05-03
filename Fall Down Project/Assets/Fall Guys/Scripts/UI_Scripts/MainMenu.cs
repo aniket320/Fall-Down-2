@@ -5,7 +5,9 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-public class MainMenu : MonoBehaviour
+using Photon.Realtime;
+
+public class MainMenu : MonoBehaviourPunCallbacks
 {
     public static MainMenu instance;
     [SerializeField] private GameObject mainmenu;
@@ -14,16 +16,38 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private TMP_InputField UserName;
     [SerializeField] private TMP_Text UsernamesDisplay;
+    [SerializeField] private GameObject loding;
     public AudioMixer audiomixer;
-        // [SerializeField]public AudioMixer audiomixer;
+    int firstRun = 0;
+    // [SerializeField]public AudioMixer audiomixer;
     // Start is called before the first frame update
     void Start()
     {
+        loding.gameObject.SetActive(true);
+        //PhotonNetwork.ConnectUsingSettings();
 
+        firstRun = PlayerPrefs.GetInt("saveUserNameForFirsttime");
 
+        if (firstRun == 0) // remember "==" for comparing, not "=" which assigns value
+        {
+            PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = "FallDown#" + Random.Range(0000, 9999));
+            PlayerPrefs.SetInt("saveUserNameForFirsttime", 1);
+            firstRun = 1;            
+        }
+        else
+        {
+            //Do lots of game save loading
+            return;
+        }
     }
-
-
+    //public override void OnConnectedToMaster()
+    //{
+    //    PhotonNetwork.JoinLobby(TypedLobby.Default);
+    //    loding.gameObject.SetActive(false);
+    //    Debug.Log("isconneted");
+    //}
+   
+        
     private void Awake()
     {
         //PhotonNetwork.AutomaticallySyncScene = true;
@@ -31,31 +55,21 @@ public class MainMenu : MonoBehaviour
     }
     // Update is called once per frame
     
-     void Update()
-    {
-        
-        
-        
-            UsernamesDisplay.text = PlayerPrefs.GetString("UserName");
-
-        
+    void Update()
+    {                     
+            UsernamesDisplay.text = PlayerPrefs.GetString("UserName");        
     }
-    public void Play()
-    {
-        
-        
-           
-           
 
-        
+    public void Play()
+    {                                         
         Debug.Log("Play");
     }
-    public void Party()
-    {
-       
-        SceneManager.LoadScene("Party");
 
+    public void Party()
+    {       
+        SceneManager.LoadScene("Party");
     }
+
     public void QuitYes()
     {
         Application.Quit();
@@ -68,10 +82,8 @@ public class MainMenu : MonoBehaviour
     //}
 
     public void saveUsername()
-    {
-        
+    {        
         PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = UserName.text);
-
     }
 
     public void SetVolume(float volume)
@@ -79,12 +91,12 @@ public class MainMenu : MonoBehaviour
         audiomixer.SetFloat("menu",volume);
     }
     
-
+   
     // Update is called once per frame
 
 
-    
-    
+
+
 
     public void SetQaulity(int qualityIndex)
     {
