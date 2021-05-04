@@ -44,7 +44,7 @@ public class Audio : MonoBehaviour
     } 
     private void Save()
     {
-        PlayerPrefs.SetFloat("music", Volslider.value);
+        PlayerPrefs.SetFloat("music", Volslider.value);    
        
         
     }
