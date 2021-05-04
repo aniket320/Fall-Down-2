@@ -14,7 +14,7 @@ public class Progress : MonoBehaviour
 
     void Awake()
     {
-        if (PlayerPrefs.HasKey("music"))
+        if (PlayerPrefs.HasKey("progress"))
         {
 
             Load();

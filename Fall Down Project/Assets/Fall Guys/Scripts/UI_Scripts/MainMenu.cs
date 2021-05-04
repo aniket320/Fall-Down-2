@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Realtime;
+using UnityEngine.Rendering;
 
 public class MainMenu : MonoBehaviourPunCallbacks
 {
@@ -19,10 +20,18 @@ public class MainMenu : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject loding;
     public AudioMixer audiomixer;
     int firstRun = 0;
+    public TMP_Dropdown DD;
+    
+    public RenderPipelineAsset[] qualitylevels;
+   // public TMP_Dropdown DD;
     // [SerializeField]public AudioMixer audiomixer;
     // Start is called before the first frame update
     void Start()
     {
+        
+
+        DD.value = QualitySettings.GetQualityLevel();
+
         loding.gameObject.SetActive(true);
         //PhotonNetwork.ConnectUsingSettings();
 
@@ -39,6 +48,8 @@ public class MainMenu : MonoBehaviourPunCallbacks
             //Do lots of game save loading
             return;
         }
+
+
     }
     //public override void OnConnectedToMaster()
     //{
@@ -50,11 +61,12 @@ public class MainMenu : MonoBehaviourPunCallbacks
         
     private void Awake()
     {
+
         //PhotonNetwork.AutomaticallySyncScene = true;
 
     }
     // Update is called once per frame
-    
+
     void Update()
     {                     
             UsernamesDisplay.text = PlayerPrefs.GetString("UserName");        
@@ -90,8 +102,8 @@ public class MainMenu : MonoBehaviourPunCallbacks
     {
         audiomixer.SetFloat("menu",volume);
     }
-    
-   
+
+
     // Update is called once per frame
 
 
@@ -100,7 +112,8 @@ public class MainMenu : MonoBehaviourPunCallbacks
 
     public void SetQaulity(int qualityIndex)
     {
-      QualitySettings.SetQualityLevel(qualityIndex);
+     QualitySettings.SetQualityLevel(qualityIndex);
+       QualitySettings.renderPipeline = qualitylevels[qualityIndex];
     }
 
     public void SetFullScreen(bool isFullScreen)
