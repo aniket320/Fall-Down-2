@@ -11,7 +11,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public static LobbyManager instance;
     //[SerializeField] private string VersionName = "0.1";
     //[SerializeField] private GameObject UserNameMenu; public GameObject usernamePanel { get { return UserNameMenu; } set { UserNameMenu = value; } }
-    //[SerializeField] private GameObject disconnect;
+    [SerializeField] private GameObject disconnect;
     [SerializeField] private GameObject loding;
     //[SerializeField] private TMP_InputField UserNameInputField;
     [SerializeField] private TMP_InputField JoinGameInputField;
@@ -60,10 +60,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //    UserNameMenu.SetActive(false);
     //}
 
-    //public void connect()
-    //{
-    //    PhotonNetwork.ConnectUsingSettings();
-    //}
+    public void connect()
+    {
+        PhotonNetwork.ConnectUsingSettings();
+    }
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.JoinLobby(TypedLobby.Default);
@@ -73,13 +73,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
-        //disconnect.gameObject.SetActive(true);
         Debug.Log("isDisconnected");
+        Invoke("disconnetPanel", 3);
     }  
+    private void disconnetPanel() { disconnect.gameObject.SetActive(true);  }
     public override void OnJoinedLobby()
     {
-        //if(disconnect.activeSelf)
-        //    disconnect.SetActive(false);
+        if (disconnect.activeSelf)
+            disconnect.SetActive(false);
         //PlayerPrefs.GetString("UserName");
         if (PlayerPrefs.GetString("UserName") != null)
             PhotonNetwork.NickName = PlayerPrefs.GetString("UserName");

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instace;
     public GameObject PlayerPrefab; 
     public GameObject EnemyPrefab;
-    //[SerializeField] private GameObject MainMenu;
+    public GameObject[] PlayerInstantiation;
     public GameObject WinPanel;
     public TMP_Text WinnernameText;
     //[SerializeField] private int NoOfPlayers;
@@ -32,20 +32,32 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        AudioManager.instance.Play("IngameAudio");
+        //AudioManager.instance.Play("IngameAudio");
+        PlayerInstantiation = GameObject.FindGameObjectsWithTag("PlayerInstacePos");
+        instatiatepos = GameObject.FindGameObjectWithTag("RespawnPos");
         starttime = GameStartComeDown;
         comeDownOver = false;
+        //PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity, 0);
         if (instace == null)
         {
             instace = this;
         }
+
+        //for (int p = 0; p < PhotonNetwork.PlayerList.Count(); p++)
+        //{
+        //    PhotonNetwork.Instantiate(PlayerPrefab.name, PlayerInstantiation[p].transform.position, Quaternion.identity, 0);
+        //}
         for (int i = PhotonNetwork.PlayerList.Count(); i < 10; i++)
         {
-            PhotonNetwork.Instantiate(EnemyPrefab.name, instatiatepos.transform.position, Quaternion.identity, 0);
-        }
+           PhotonNetwork.Instantiate(EnemyPrefab.name, PlayerInstantiation[i].transform.position, Quaternion.identity, 0);
+        }     
+       
+       
 
-        instatiatepos = GameObject.FindGameObjectWithTag("RespawnPos");
-        PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity,0);
+        //}
+
+
+
         StartCoroutine(LevelStart());
 
         //GameObject[] PlayersCount = GameObject.FindGameObjectsWithTag("Player");
@@ -116,7 +128,6 @@ public class GameManager : MonoBehaviour
         while (PhotonNetwork.IsConnected)
             yield return null;
         SceneManager.LoadScene("Party");       
-
     }
     
     public IEnumerator LevelStart()

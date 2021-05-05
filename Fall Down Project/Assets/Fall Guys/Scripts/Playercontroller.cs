@@ -18,6 +18,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     [SerializeField] private Transform Groundpos;
     [SerializeField] private GameObject thirdpersonCamera;
     [SerializeField] private TMP_Text PlayerNameText;
+    //[SerializeField] private GameObject[] destination;
     public bool canMove;
     Rigidbody rb;
     float currentvelocity;
@@ -29,7 +30,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     Vector3 smoothdamp;
     Quaternion smoothRotation;
     private Animator anim;
-    public Animator ani;
+    public Animator ani; int i = 0;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -79,6 +80,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     }
     private void Update()
     {
+
        
     }
     private void LateUpdate()
@@ -107,15 +109,19 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
            PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name,GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
 
         }
-        
+        //if (transform.position.z >= destination[i].transform.position.z)
+        //{
+        //    //Destroy(destination[i]);
+        //    PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name, destination[i].transform.position, destination[i].transform.rotation, 0);
+
+        //    i++;
+
+        //}
+        /* else*/
+
             float x = /*Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
             float y = /*Input.GetAxis("Vertical") ||*/ joystick.Vertical;
-            Vector3 direction = new Vector3(x, 0, y);
-       
-
-
-
-
+            Vector3 direction = new Vector3(x, 0, y);     
 
         if (direction.magnitude >= 0.1f)
         {

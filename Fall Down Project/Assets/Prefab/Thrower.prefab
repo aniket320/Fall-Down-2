@@ -458,4 +458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5cb35b1ed43064d9ff8d46631b070e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backwardForce: 3
+  UpwardForce: 2
   stunnedtime: 0.7

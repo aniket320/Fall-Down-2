@@ -28,9 +28,9 @@ public class MainMenu : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioManager.instance.Play("MenuAudio");
 
-        DD.value = QualitySettings.GetQualityLevel();
+        //DD.value = QualitySettings.GetQualityLevel();
 
         loding.gameObject.SetActive(true);
         //PhotonNetwork.ConnectUsingSettings();

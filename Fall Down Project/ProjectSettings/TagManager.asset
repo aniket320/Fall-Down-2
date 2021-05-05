@@ -13,6 +13,7 @@ TagManager:
   - Slide
   - Wall
   - Destination
+  - PlayerInstacePos
   layers:
   - Default
   - TransparentFX

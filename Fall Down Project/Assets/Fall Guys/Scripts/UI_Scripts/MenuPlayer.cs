@@ -7,6 +7,6 @@ public class MenuPlayer : MonoBehaviour
    
     void Update()
     {
-        transform.Rotate(new Vector3(0.0f, -Input.GetAxis("Mouse X"),0.0f));
+        transform.eulerAngles +=(new Vector3(0.0f, -Input.GetAxis("Mouse X"),0.0f));
     }
 }
