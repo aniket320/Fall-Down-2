@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
     {
         AudioManager.instance.Play("MenuAudio");
 
-        //DD.value = QualitySettings.GetQualityLevel();
+       DD.value = QualitySettings.GetQualityLevel();
 
         loding.gameObject.SetActive(true);
         //PhotonNetwork.ConnectUsingSettings();
