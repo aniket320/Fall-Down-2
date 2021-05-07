@@ -24,9 +24,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject inRoom;
     [SerializeField] private Transform PlayerListCount;
     [SerializeField] private GameObject PlayerListPrefab;
-    [SerializeField] private GameObject EnemyListPrefab;
     [SerializeField] private GameObject Playbtn;
-    
+    [SerializeField] private GameObject Error_Num_Players;
+
 
     private void Awake()
     {
@@ -151,22 +151,35 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         waitingforOtherPlayerPanel.SetActive(true);
         StartCoroutine(SceneLoad());
-
+    }
+    public void Play_ForCreateLobby()
+    {
+        if (PhotonNetwork.PlayerList.Count() > 1)
+        {
+            waitingforOtherPlayerPanel.SetActive(true);
+            StartCoroutine(InRoomSceneLoad());
+        }
+        else
+            Error_Num_Players.SetActive(true);
+         
+       
     }
     private void Update()
     {
+        
         Playbtn.SetActive(PhotonNetwork.IsMasterClient);
-            //waitingforOtherPlayer_text.text = "Finding Other Players: " + PhotonNetwork.PlayerList.Count()+ "/20";
-
-
+        waitingforOtherPlayer_text.text = "Finding Other Players: " + PhotonNetwork.PlayerList.Count();
     }
     IEnumerator SceneLoad()
     {
         yield return new WaitForSeconds(3);
-        for (int i = PhotonNetwork.PlayerList.Count(); i <= 10; i++)
-        {
-            NumberOfPlayerTAdd ++;
-        }
+        int randomlevel = Random.Range(2,5);        
+        PhotonNetwork.LoadLevel(randomlevel);
+    }
+    IEnumerator InRoomSceneLoad()
+    {
+        yield return new WaitForSeconds(3);
+        //int randomlevel = Random.Range(5,1);
         PhotonNetwork.LoadLevel(2);
 
     }

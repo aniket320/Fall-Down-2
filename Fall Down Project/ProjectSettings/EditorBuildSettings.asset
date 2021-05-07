@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Fall Guys/Party.unity
     guid: 4eca58470a58e6848b7cd45d6196612c
   - enabled: 1
-    path: Assets/Fall Guys/Level 01 Edited.unity
+    path: Assets/Fall Guys/Levels/Level 01 Edited.unity
     guid: 1cd6944aae3869b4c95a4eed976c2595
+  - enabled: 1
+    path: Assets/Fall Guys/Levels/PlayBtnLevel/Level5.unity
+    guid: d3ba0d7df28a0e8478d1687be48b9fa3
+  - enabled: 1
+    path: Assets/Fall Guys/Levels/level4.unity
+    guid: 50036ea6967585a49b171493bf9672cc
+  - enabled: 1
+    path: Assets/Fall Guys/Levels/RoomLevel/level3.unity
+    guid: 012603d14ca97064ea6552a035527204
   m_configObjects: {}
