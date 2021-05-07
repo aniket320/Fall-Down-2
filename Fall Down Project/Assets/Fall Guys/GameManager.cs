@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
             {
                 PhotonNetwork.Instantiate(EnemyPrefab.name, PlayerInstantiation[i].transform.position, Quaternion.identity, 0);
             }
-        GameObject g = GameObject.FindGameObjectWithTag("PlayerInstancePos");
+        GameObject g = GameObject.FindGameObjectWithTag("PlayerInstacePos");
         PhotonNetwork.Instantiate(PlayerPrefab.name, g.transform.position, Quaternion.identity, 0);
         //}   
 

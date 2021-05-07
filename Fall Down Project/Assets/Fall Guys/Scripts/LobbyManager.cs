@@ -173,13 +173,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     IEnumerator SceneLoad()
     {
         yield return new WaitForSeconds(3);
-        int randomlevel = Random.Range(2,5);        
-        PhotonNetwork.LoadLevel(randomlevel);
+        //int randomlevel = Random.Range(2,5);        
+        PhotonNetwork.LoadLevel(2);
     }
     IEnumerator InRoomSceneLoad()
     {
         yield return new WaitForSeconds(3);
-        //int randomlevel = Random.Range(5,1);
+        int randomlevel = Random.Range(5, 1);
         PhotonNetwork.LoadLevel(2);
 
     }
