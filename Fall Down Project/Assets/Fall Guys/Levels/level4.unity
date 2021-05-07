@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.497
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1353524616}
-  m_IndirectSpecularColor: {r: 0.26434258, g: 0.49639475, b: 0.6383954, a: 0.497}
+  m_IndirectSpecularColor: {r: 0.26516336, g: 0.4954418, b: 0.63759124, a: 0.497}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3064,7 +3064,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 94
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &643466279
 BoxCollider:
