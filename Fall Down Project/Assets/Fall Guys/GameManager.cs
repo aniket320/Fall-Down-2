@@ -48,15 +48,15 @@ public class GameManager : MonoBehaviour
         //    PhotonNetwork.Instantiate(PlayerPrefab.name, PlayerInstantiation[p].transform.position, Quaternion.identity, 0);
         //}
 
-        //if (PhotonNetwork.PlayerList.Count() == 1)
-        //{
+        if (PhotonNetwork.PlayerList.Count() == 1)
+        {
             for (int i = PhotonNetwork.PlayerList.Count(); i < 10; i++)
             {
                 PhotonNetwork.Instantiate(EnemyPrefab.name, PlayerInstantiation[i].transform.position, Quaternion.identity, 0);
             }
-        GameObject g = GameObject.FindGameObjectWithTag("PlayerInstacePos");
-        PhotonNetwork.Instantiate(PlayerPrefab.name, g.transform.position, Quaternion.identity, 0);
-        //}   
+            GameObject g = GameObject.FindGameObjectWithTag("PlayerInstacePos");
+            PhotonNetwork.Instantiate(PlayerPrefab.name, g.transform.position, Quaternion.identity, 0);
+        }
 
 
 
