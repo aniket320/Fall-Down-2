@@ -19,14 +19,14 @@ public class bounce : MonoBehaviour
                Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
                 backwardDir = c.normal;
                 StartCoroutine(PlayerStunned());
-                rb.velocity = ( -backwardDir * 3 ) +(Vector3.up * 2);                
+                rb.velocity = ( -backwardDir * backwardForce ) +(Vector3.up * UpwardForce);                
             }
             if (other.gameObject.CompareTag("Enemy"))
             {
                 Rigidbody rb = other.gameObject.GetComponent<Rigidbody>();
                 backwardDir = c.normal;
                 StartCoroutine(EnemyStunned());
-                rb.velocity = (-backwardDir * 3) + (Vector3.up * 2);
+                rb.velocity = (-backwardDir * backwardForce) + (Vector3.up * UpwardForce);
             }
         }         
      }

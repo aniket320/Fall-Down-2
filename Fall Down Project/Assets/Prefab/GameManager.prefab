@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 9037894339959508327}
   - component: {fileID: 2319858891672873426}
   m_Layer: 5
-  m_Name: ComeDownText (TMP)
+  m_Name: CountDownText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1220,13 +1220,14 @@ MonoBehaviour:
     type: 3}
   EnemyPrefab: {fileID: 1027844613886690829, guid: c6ee87b106e22ed47a53f87a4cad7356,
     type: 3}
+  PlayerInstantiation: []
   WinPanel: {fileID: 1799874502816992335}
   WinnernameText: {fileID: 4142354080477217763}
   instatiatepos: {fileID: 0}
   firstPlayer: 0
-  GameStartComeDowntext: {fileID: 2319858891672873426}
-  GameStartComeDown: 5
-  comeDownOver: 0
+  GameStartCountDowntext: {fileID: 2319858891672873426}
+  GameStartCountDown: 5
+  CountDownOver: 0
 --- !u!1 &8895956497097112580
 GameObject:
   m_ObjectHideFlags: 0

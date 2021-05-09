@@ -16,7 +16,6 @@ public class Trampoline : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log(other.gameObject.name);
             other.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * UpwardForce * Time.deltaTime,ForceMode.Impulse);
         }
     }

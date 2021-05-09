@@ -18,7 +18,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     [SerializeField] private Transform Groundpos;
     [SerializeField] private GameObject thirdpersonCamera;
     [SerializeField] private TMP_Text PlayerNameText;
-    //[SerializeField] private GameObject[] destination;
+    [SerializeField] private GameObject[] destination;
     public bool canMove;
     Rigidbody rb;
     float currentvelocity;
@@ -60,7 +60,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         else
             PlayerNameText.text = photonView.Owner.NickName;
 
-        JumpBtn.onClick.AddListener(JumpButton);
+        JumpBtn.onClick.AddListener(JumpButton); 
     }
 
     // Update is called once per frame
@@ -68,7 +68,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     {
         if(photonView.IsMine) 
         {
-            if(canMove && GameManager.instace.comeDownOver)
+            if(canMove && GameManager.instace.CountDownOver)
             playerMove();
             PlayerPrefs.GetString("UserName");
             
@@ -78,15 +78,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             SmoothMoveOtherScreenPlayer();
         }
     }
-    private void Update()
-    {
-
-       
-    }
-    private void LateUpdate()
-    {
-       
-    }
+   
     public void SmoothMoveOtherScreenPlayer()
     {
         transform.position = Vector3.Lerp(transform.position, smoothdamp, Time.deltaTime * smoothMove);
@@ -106,20 +98,19 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         if (this.transform.position.y <= -15f)
         {
            Destroy(this.gameObject);
-           PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name,GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
+            PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name, GameManager.instace.instatiatepos.transform.position, Quaternion.identity, 0);
+
+            //if (transform.position.z >= destination[i].transform.position.z)
+            //{            
+            //    PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name, destination[i].transform.position, destination[i].transform.rotation, 0);
+            //    i++;
+            //}
+            //else
 
         }
-        //if (transform.position.z >= destination[i].transform.position.z)
-        //{
-        //    //Destroy(destination[i]);
-        //    PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name, destination[i].transform.position, destination[i].transform.rotation, 0);
 
-        //    i++;
 
-        //}
-        /* else*/
-
-            float x = /*Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
+        float x = /*Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
             float y = /*Input.GetAxis("Vertical") ||*/ joystick.Vertical;
             Vector3 direction = new Vector3(x, 0, y);     
 

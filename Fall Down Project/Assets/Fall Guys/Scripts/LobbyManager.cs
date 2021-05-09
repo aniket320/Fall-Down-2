@@ -18,7 +18,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     //[SerializeField] private TMP_InputField CreateGameInputField;
     [SerializeField] private GameObject waitingforOtherPlayerPanel;
     [SerializeField] private TMP_Text waitingforOtherPlayer_text;
-    [SerializeField] private int NumberOfPlayerTAdd = 1;
     [SerializeField] private TextMeshProUGUI RoomNo;
     [SerializeField] private GameObject connectingPanel;
     [SerializeField] private GameObject inRoom;
@@ -160,13 +159,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             StartCoroutine(InRoomSceneLoad());
         }
         else
-            Error_Num_Players.SetActive(true);
-         
+            Error_Num_Players.SetActive(true);         
        
     }
     private void Update()
-    {
-        
+    {        
         Playbtn.SetActive(PhotonNetwork.IsMasterClient);
         waitingforOtherPlayer_text.text = "Finding Other Players: " + PhotonNetwork.PlayerList.Count();
     }
@@ -174,7 +171,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(3);
         level = Random.Range(2, 5);
-        PhotonNetwork.LoadLevel(level);
+        PhotonNetwork.LoadLevel(2);
     }
     IEnumerator InRoomSceneLoad()
     {

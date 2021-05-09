@@ -7,14 +7,12 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
 {
     public static EnemyAI instance;
     //[SerializeField] private PhotonView photonview;
-    public NavMeshAgent agent;
-    [SerializeField] private GameObject FinishLine;
+    private NavMeshAgent agent;
     public GameObject[] destination;
-    private Rigidbody rb;
-    int i = 0;
-    public Material mat;
-    public bool canMove;
+    private Rigidbody rb; int i = 0;
+    public Material mat;   
     [SerializeField] private TMP_Text EnemyNameText;
+    public bool canMove;
 
     void Start()
     {
@@ -25,12 +23,12 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
         rb = GetComponent<Rigidbody>();
 
 
-        foreach (Transform t in transform)
-        {
-            //destination.add
-            new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
+        //foreach (Transform t in transform)
+        //{
+        //    //destination.add
+        //    new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
 
-        }
+        //}
         if (instance == null)
         {
             new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f), 1);
@@ -41,21 +39,15 @@ public class EnemyAI : MonoBehaviourPun/*, IPunObservable*/
         agent.isStopped = false;
 
     }
-    public void JumpButton()
-    {
-        if (true)
-        {
-            rb.AddForce(Vector3.up * 100 * Time.fixedDeltaTime, ForceMode.Impulse);
-        }
-    }
+   
     private void Update()
     {
 
-        if (canMove && GameManager.instace.comeDownOver)
+        if (canMove && GameManager.instace.CountDownOver)
         {
             GetComponent<Animator>().Play("run");
 
-            if (GameManager.instace.firstPlayer) agent.isStopped = true;
+            //if (GameManager.instace.firstPlayer) agent.isStopped = true;
             agent.SetDestination(destination[i].transform.position);
 
             if (transform.position.z >= destination[i].transform.position.z)

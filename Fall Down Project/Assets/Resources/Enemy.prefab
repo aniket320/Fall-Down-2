@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8397350073750656524}
   - component: {fileID: 6686495892720210903}
   - component: {fileID: 6082423332301668107}
-  - component: {fileID: 7170659217259184634}
+  - component: {fileID: 208943165576710822}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -186,12 +186,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0361c25b3e687e44abe2ac7243d07d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  FinishLine: {fileID: 0}
   destination: []
   mat: {fileID: 0}
-  canMove: 0
   EnemyNameText: {fileID: 6209708156713454285}
+  canMove: 0
 --- !u!136 &1583396347178976341
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -286,7 +284,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!54 &7170659217259184634
+--- !u!54 &208943165576710822
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,7 +298,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &1027844615154810959
 GameObject:

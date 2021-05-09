@@ -14,30 +14,26 @@ public class GameManager : MonoBehaviour
     public GameObject[] PlayerInstantiation;
     public GameObject WinPanel;
     public TMP_Text WinnernameText;
+    public GameObject instatiatepos;
+    public bool firstPlayer;
+    public TMP_Text GameStartCountDowntext;
+    public int GameStartCountDown;
+    private float starttime;
+    bool CountDownStart = true;
+    public bool CountDownOver = false;
     //[SerializeField] private int NoOfPlayers;
     //public int NoOfPlayerCanQualifie;
     //public int NoOfPlayerQualified;
-    public GameObject instatiatepos;
-    public bool firstPlayer;
-    public TMP_Text GameStartComeDowntext;
-    public int GameStartComeDown;
-    private float starttime;
-    bool comeDownStart = true;
-    public bool comeDownOver = false;
     //public GameObject[] QualifiedPlayer;
 
-    private void Awake()
-    {
-        
-    }
+
     private void Start()
     {
-        //AudioManager.instance.Play("IngameAudio");
+        AudioManager.instance.Play("IngameAudio");
         PlayerInstantiation = GameObject.FindGameObjectsWithTag("PlayerInstacePos");
         instatiatepos = GameObject.FindGameObjectWithTag("RespawnPos");
-        starttime = GameStartComeDown;
-        comeDownOver = false;
-        //PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity, 0);
+        starttime = GameStartCountDown;
+        CountDownOver = false;
         if (instace == null)
         {
             instace = this;
@@ -57,6 +53,8 @@ public class GameManager : MonoBehaviour
             GameObject g = GameObject.FindGameObjectWithTag("PlayerInstacePos");
             PhotonNetwork.Instantiate(PlayerPrefab.name, g.transform.position, Quaternion.identity, 0);
         }
+        else
+            PhotonNetwork.Instantiate(PlayerPrefab.name, instatiatepos.transform.position, Quaternion.identity, 0);
 
 
 
@@ -82,16 +80,16 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if (comeDownStart)
+        if (CountDownStart)
         {
             starttime -= Time.deltaTime;
-            GameStartComeDown = Mathf.RoundToInt(starttime);
-            GameStartComeDowntext.text = GameStartComeDown.ToString();
-            if (GameStartComeDown <= 0)
+            GameStartCountDown = Mathf.RoundToInt(starttime);
+            GameStartCountDowntext.text = GameStartCountDown.ToString();
+            if (GameStartCountDown <= 0)
             {
-                GameStartComeDowntext.text = "Go!";
-                comeDownStart = false;
-                comeDownOver = true;
+                GameStartCountDowntext.text = "Go!";
+                CountDownStart = false;
+                CountDownOver = true;
                 Invoke("ComeDowntextDisable", 1);
             }
             
@@ -105,9 +103,31 @@ public class GameManager : MonoBehaviour
     }
     private void ComeDowntextDisable()
     {
-        GameStartComeDowntext.gameObject.SetActive(false);
+        GameStartCountDowntext.gameObject.SetActive(false);
 
     }
+   
+    public void leaveGame()
+    {
+        StartCoroutine(ReturnTLobby());
+    }
+    IEnumerator ReturnTLobby()
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        SceneManager.LoadScene("Party");       
+    }
+    
+    public IEnumerator LevelStart()
+    {
+        yield return new WaitForSeconds(5);
+    }
+    //public IEnumerator NextLevel()
+    //{
+    //    yield return new WaitForSeconds(4);
+    //    LobbyManager.instance.Play();    
+    //}
     //public void SpawnPlayer()
     //{
     //    //float randompos = Random.Range(-5f, 5f);
@@ -123,26 +143,5 @@ public class GameManager : MonoBehaviour
     //    qualifiedPanel.SetActive(true);
     //    yield return new WaitForSeconds(2);
     //    qualifiedPanel.SetActive(false);        
-    //}
-    public void leaveGame()
-    {
-        StartCoroutine(ReturnTLobby());
-    }
-    IEnumerator ReturnTLobby()
-    {
-        PhotonNetwork.Disconnect();
-        while (PhotonNetwork.IsConnected)
-            yield return null;
-        SceneManager.LoadScene("Party");       
-    }
-    
-    public IEnumerator LevelStart()
-    {
-        yield return new WaitForSeconds(2);
-    }
-    //public IEnumerator NextLevel()
-    //{
-    //    yield return new WaitForSeconds(4);
-    //    LobbyManager.instance.Play();    
     //}
 }
