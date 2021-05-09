@@ -6,24 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Fall Guys/Menu+Lobby.unity
+    path: Assets/Fall Guys/_Levels/Menu+Lobby.unity
     guid: 1c5170c975baa5c4aaba6a1a6bd66f03
   - enabled: 1
-    path: Assets/Fall Guys/Party.unity
+    path: Assets/Fall Guys/_Levels/Party.unity
     guid: 4eca58470a58e6848b7cd45d6196612c
   - enabled: 1
-    path: Assets/Fall Guys/Levels/level1.unity
+    path: Assets/Fall Guys/_Levels/level1.unity
     guid: 1cd6944aae3869b4c95a4eed976c2595
   - enabled: 1
-    path: Assets/Fall Guys/Levels/Level2.unity
+    path: Assets/Fall Guys/_Levels/Level2.unity
     guid: d3ba0d7df28a0e8478d1687be48b9fa3
   - enabled: 1
-    path: Assets/Fall Guys/Levels/level3.unity
+    path: Assets/Fall Guys/_Levels/level3.unity
     guid: 50036ea6967585a49b171493bf9672cc
   - enabled: 1
-    path: Assets/Fall Guys/Levels/level4.unity
+    path: Assets/Fall Guys/_Levels/level4.unity
     guid: 012603d14ca97064ea6552a035527204
   - enabled: 1
-    path: Assets/Fall Guys/Levels/level5.unity
+    path: Assets/Fall Guys/_Levels/level5.unity
     guid: d1e2cccb7f0697043bae3081cbdfc353
   m_configObjects: {}
