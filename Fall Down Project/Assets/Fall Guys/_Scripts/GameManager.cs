@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private float starttime;
     bool CountDownStart = true;
     public bool CountDownOver = false;
+    bool loadMainscene;
     //[SerializeField] private int NoOfPlayers;
     //public int NoOfPlayerCanQualifie;
     //public int NoOfPlayerQualified;
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
 
         if (PhotonNetwork.PlayerList.Count() == 1)
         {
+            loadMainscene = true;
+            PlayerPrefs.SetInt("ShowIntersticialAds", 1);
             for (int i = PhotonNetwork.PlayerList.Count(); i < 10; i++)
             {
                 PhotonNetwork.Instantiate(EnemyPrefab.name, PlayerInstantiation[i].transform.position, Quaternion.identity, 0);
@@ -53,8 +56,11 @@ public class GameManager : MonoBehaviour
             PhotonNetwork.Instantiate(PlayerPrefab.name, g.transform.position, Quaternion.identity, 0);
         }
         else
+        {
             PhotonNetwork.Instantiate(PlayerPrefab.name, InitialRespawnpos.transform.position, Quaternion.identity, 0);
-
+            PlayerPrefs.SetInt("ShowIntersticialAds", 0);
+        }
+           
 
         AudioManager.instance.Play("IngameAudio");
         
@@ -115,10 +121,10 @@ public class GameManager : MonoBehaviour
         PhotonNetwork.Disconnect();
         while (PhotonNetwork.IsConnected)
             yield return null;
-        if(PhotonNetwork.PlayerList.Count() == 1)
-            SceneManager.LoadScene(1); 
+        if (loadMainscene)
+            SceneManager.LoadScene(0);
         else
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
     }
     
     public IEnumerator LevelStart()

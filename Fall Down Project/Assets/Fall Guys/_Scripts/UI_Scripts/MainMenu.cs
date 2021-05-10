@@ -20,21 +20,25 @@ public class MainMenu : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject loding;
     public AudioMixer audiomixer;
     int firstRun = 0;
-    public TMP_Dropdown DD;
-    
+    public TMP_Dropdown DD;    
     public RenderPipelineAsset[] qualitylevels;
-   // public TMP_Dropdown DD;
-    // [SerializeField]public AudioMixer audiomixer;
+   
     // Start is called before the first frame update
     void Start()
-    {
+    {      
         AudioManager.instance.audioStop = true;
+
         DD.value = QualitySettings.GetQualityLevel();
 
         loding.gameObject.SetActive(true);
-        //PhotonNetwork.ConnectUsingSettings();
 
         firstRun = PlayerPrefs.GetInt("saveUserNameForFirsttime");
+
+        if (PlayerPrefs.GetInt("ShowIntersticialAds") == 1)
+            AdManager.Instance.ShowAds();
+        else
+            return;
+        PlayerPrefs.SetInt("ShowIntersticialAds", 0);
 
         if (firstRun == 0) // remember "==" for comparing, not "=" which assigns value
         {
@@ -47,8 +51,9 @@ public class MainMenu : MonoBehaviourPunCallbacks
             //Do lots of game save loading
             return;
         }
-
-
+      
+      
+        
     }
     //public override void OnConnectedToMaster()
     //{
