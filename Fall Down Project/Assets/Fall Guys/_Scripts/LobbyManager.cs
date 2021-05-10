@@ -9,11 +9,8 @@ using System.Linq;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public static LobbyManager instance;
-    //[SerializeField] private string VersionName = "0.1";
-    //[SerializeField] private GameObject UserNameMenu; public GameObject usernamePanel { get { return UserNameMenu; } set { UserNameMenu = value; } }
     [SerializeField] private GameObject disconnect;
     [SerializeField] private GameObject loding;
-    //[SerializeField] private TMP_InputField UserNameInputField;
     [SerializeField] private TMP_InputField JoinGameInputField;
     [SerializeField] private GameObject waitingforOtherPlayerPanel;
     [SerializeField] private TMP_Text waitingforOtherPlayer_text;
@@ -39,7 +36,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             loding.gameObject.SetActive(true);
 
         }
-        //PhotonNetwork.ConnectUsingSettings(VersionName);
+        
     }
     private void Start()
     {
@@ -53,10 +50,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     }
 
-    //public void connectbutton()
-    //{
-    //    UserNameMenu.SetActive(false);
-    //}
 
     public void connect()
     {
@@ -79,25 +72,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (disconnect.activeSelf)
             disconnect.SetActive(false);
-        //PlayerPrefs.GetString("UserName");
+        
         if (PlayerPrefs.GetString("UserName") != null)
             PhotonNetwork.NickName = PlayerPrefs.GetString("UserName");
        
     }
-    //public void UserNameInput()
-    //{
-    //    if (UserNameInputField.text.Length >= 4)
-    //    {
-    //        StartButton.SetActive(true);
-    //    }
-    //    else
-    //        StartButton.SetActive(false);
-    //}
-
-    //public void startButtonClick()
-    //{
-    //    UserNameMenu.SetActive(false);
-    //}
+   
 
     public void CreateRoom()
     {       
@@ -107,10 +87,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         RoomNo.text = "Room Code:" + roomNo;
     }
     public void JoinRoom()
-    {
-        //RoomOptions roomOptions = new RoomOptions();
-        //roomOptions.MaxPlayers = 5;
-       
+    {      
         RoomNo.text = "Room Code:" + JoinGameInputField.text;
         Debug.Log("isJoinedRoom");
         PhotonNetwork.JoinRoom(JoinGameInputField.text);
@@ -169,13 +146,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     IEnumerator SceneLoad()
     {
         yield return new WaitForSeconds(3);
-        //level = Random.Range(2, 5);
+        level = Random.Range(2, 5);
         PhotonNetwork.LoadLevel(2);
     }
     IEnumerator InRoomSceneLoad()
     {
         yield return new WaitForSeconds(3);
-        //level = Random.Range(2, 7);
+        level = Random.Range(2, 7);
         PhotonNetwork.LoadLevel(2);
 
     }

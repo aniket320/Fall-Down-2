@@ -27,20 +27,19 @@ public class MainMenu : MonoBehaviourPunCallbacks
     void Start()
     {      
         AudioManager.instance.audioStop = true;
-
         DD.value = QualitySettings.GetQualityLevel();
-
         loding.gameObject.SetActive(true);
-
         firstRun = PlayerPrefs.GetInt("saveUserNameForFirsttime");
 
+        
+        
         if (PlayerPrefs.GetInt("ShowIntersticialAds") == 1)
-            AdManager.Instance.ShowAds();
+            AdManager.Instance.ShowAds();    //ads
         else
             return;
         PlayerPrefs.SetInt("ShowIntersticialAds", 0);
 
-        if (firstRun == 0) // remember "==" for comparing, not "=" which assigns value
+        if (firstRun == 0) 
         {
             PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = "FallDown#" + Random.Range(0000, 9999));
             PlayerPrefs.SetInt("saveUserNameForFirsttime", 1);
@@ -48,30 +47,14 @@ public class MainMenu : MonoBehaviourPunCallbacks
         }
         else
         {
-            //Do lots of game save loading
-            return;
+           return;
         }
       
       
         
     }
-    //public override void OnConnectedToMaster()
-    //{
-    //    PhotonNetwork.JoinLobby(TypedLobby.Default);
-    //    loding.gameObject.SetActive(false);
-    //    Debug.Log("isconneted");
-    //}
-   
-        
-    private void Awake()
-    {
-
-        //PhotonNetwork.AutomaticallySyncScene = true;
-
-    }
-    // Update is called once per frame
-
-    void Update()
+       
+        void Update()
     {                     
             UsernamesDisplay.text = PlayerPrefs.GetString("UserName");        
     }
@@ -92,11 +75,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
         Debug.Log("isquit");
     }
 
-    //public void Username()
-    //{
-    //    names.text = UserName.text;
-    //}
-
+    
     public void saveUsername()
     {        
         PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = UserName.text);
@@ -106,13 +85,6 @@ public class MainMenu : MonoBehaviourPunCallbacks
     {
         audiomixer.SetFloat("menu",volume);
     }
-
-
-    // Update is called once per frame
-
-
-
-
 
     public void SetQaulity(int qualityIndex)
     {
