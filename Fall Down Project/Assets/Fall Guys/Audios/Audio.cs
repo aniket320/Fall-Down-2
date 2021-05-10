@@ -11,10 +11,10 @@ public class Audio : MonoBehaviour
     public AudioMixer Am;
 
 
-    private void SetValue(float slidervalue)
-    {
-        Am.SetFloat("music", Mathf.Log10(slidervalue));
-    }
+    //private void SetValue(float slidervalue)
+   // {
+   //     Am.SetFloat("music", Mathf.Log10(slidervalue));
+  //  }
     // Start is called before the first frame update
 
     void Awake()

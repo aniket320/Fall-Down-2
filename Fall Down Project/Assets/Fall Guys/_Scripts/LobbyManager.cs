@@ -169,14 +169,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     IEnumerator SceneLoad()
     {
         yield return new WaitForSeconds(3);
-        level = Random.Range(2, 5);
-        PhotonNetwork.LoadLevel(level);
+        //level = Random.Range(2, 5);
+        PhotonNetwork.LoadLevel(2);
     }
     IEnumerator InRoomSceneLoad()
     {
         yield return new WaitForSeconds(3);
-        level = Random.Range(2, 7);
-        PhotonNetwork.LoadLevel(level);
+        //level = Random.Range(2, 7);
+        PhotonNetwork.LoadLevel(2);
 
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
