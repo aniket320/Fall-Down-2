@@ -20,7 +20,7 @@ public class FinishLine : MonoBehaviourPun
         {
            
             GameManager.instace.WinPanel.SetActive(true);
-            GameManager.instace.WinnernameText.text = " Winner: " + other.gameObject.GetComponent<Playercontroller>().PlayerUsername;
+            GameManager.instace.WinnernameText.text = other.gameObject.GetComponent<Playercontroller>().PlayerUsername;
             if (Players != null)
             {
                 foreach (GameObject p in Players)
@@ -41,7 +41,7 @@ public class FinishLine : MonoBehaviourPun
         if (other.CompareTag("Enemy"))
         {
             GameManager.instace.WinPanel.SetActive(true);
-            GameManager.instace.WinnernameText.text = " Winner: " + other.gameObject.GetComponent<EnemyAI>().EnemyNameText.text;
+            GameManager.instace.WinnernameText.text = other.gameObject.GetComponent<EnemyAI>().EnemyNameText.text;
             if (enemy != null)
             {
                 foreach (GameObject e in enemy)

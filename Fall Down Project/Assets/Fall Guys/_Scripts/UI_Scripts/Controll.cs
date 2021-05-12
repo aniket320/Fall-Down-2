@@ -12,7 +12,6 @@ public class Controll : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            Debug.Log("thisinstance");
         }
         else
         {

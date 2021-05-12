@@ -190,6 +190,8 @@ MonoBehaviour:
   speed: 5
   JumpForce: 200
   smoothMove: 10
+  smoothDampY: 0.5
+  smoothDampX: 0.05
   GroundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -197,9 +199,9 @@ MonoBehaviour:
   thirdpersonCamera: {fileID: 1027844615154810959}
   PlayerNameText: {fileID: 6209708156713454285}
   destination: []
-  canMove: 0
   PlayerUsername: 
-  a: {fileID: 0}
+  canMove: 0
+  enablemobileInput: 1
 --- !u!136 &1583396347178976341
 CapsuleCollider:
   m_ObjectHideFlags: 0

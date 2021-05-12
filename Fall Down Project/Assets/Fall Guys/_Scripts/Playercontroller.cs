@@ -5,6 +5,7 @@ using UnityEngine.Android;
 using Photon.Pun;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class Playercontroller : MonoBehaviourPun,IPunObservable
 {
@@ -14,13 +15,16 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     [SerializeField] private float speed;
     [SerializeField] private float JumpForce = 100f;
     [SerializeField] private float smoothMove = 10f;   
+    [SerializeField] private float smoothDampY = .5f;
+    [SerializeField] private float smoothDampX = .05f;
     [SerializeField] private LayerMask GroundLayer;
     [SerializeField] private Transform Groundpos;
     [SerializeField] private GameObject thirdpersonCamera;
     [SerializeField] private TMP_Text PlayerNameText;
     [SerializeField] private GameObject[] destination;
-    public bool canMove;
+    [HideInInspector] public string PlayerUsername;
     Rigidbody rb;
+    float smoothDampReference;
     float currentvelocity;
     float GroundSphereRadius = 0.1f;
     private GameObject Camera;
@@ -29,10 +33,11 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     bool isGrounded;
     Vector3 smoothdamp;
     Quaternion smoothRotation;
-    public string PlayerUsername;
-    private Animator anim;
-    public Animator a; int i = 0;
-
+    int i = 0;
+    float x; float y;
+    public bool canMove;
+    //public FixedTouchField touchField;
+    public bool enablemobileInput = false;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -40,6 +45,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         JumpBtn = Btn.GetComponent<Button>();
         GameObject joy = GameObject.Find("Fixed Joystick");
         joystick = joy.GetComponent<Joystick>();
+        GameObject TouchField = GameObject.Find("TouchField");
     }
     void Start()
     {
@@ -73,14 +79,29 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             if(canMove && GameManager.instace.CountDownOver)
             playerMove();
             PlayerPrefs.GetString("UserName");
-            
         }
         else
         {
             SmoothMoveOtherScreenPlayer();
         }
     }
-   
+    private void Update()
+    {
+        if (enablemobileInput)
+        {
+             x = joystick.Horizontal;
+             y = joystick.Vertical;
+            float p = Mathf.SmoothDamp(0, FixedTouchField.instance.TouchDist.y, ref smoothDampReference, Time.deltaTime*smoothDampY);
+            float q = Mathf.SmoothDamp(0, FixedTouchField.instance.TouchDist.x, ref smoothDampReference, Time.deltaTime*smoothDampX);
+            thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_YAxis.Value +=p;
+            thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_XAxis.Value -= q;
+        }
+        else
+        {
+             x = Input.GetAxis("Horizontal");
+             y = Input.GetAxis("Vertical");
+        }
+    }
     public void SmoothMoveOtherScreenPlayer()
     {
         transform.position = Vector3.Lerp(transform.position, smoothdamp, Time.deltaTime * smoothMove);
@@ -110,20 +131,18 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
 
         }
 
+        
 
-        float x = /*Input.GetAxis("Horizontal") ||*/ joystick.Horizontal;
-            float y = /*Input.GetAxis("Vertical") ||*/ joystick.Vertical;
-            Vector3 direction = new Vector3(x, 0, y);     
-
+        Vector3 direction = new Vector3(x, 0, y);
         if (direction.magnitude >= 0.1f)
         {
+           
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.transform.eulerAngles.y; 
             float rot = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentvelocity, smoothRottime);
             transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
             Vector3 moveAngle = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             rb.MovePosition(rb.position + moveAngle * Time.fixedDeltaTime * speed);
             GetComponent<Animator>().Play("run");
-
         }
     }
     public void JumpButton()
