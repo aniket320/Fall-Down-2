@@ -6,10 +6,10 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviourPun
 { 
     public static EnemyAI instance;
-    private NavMeshAgent agent;
+    [HideInInspector]public NavMeshAgent agent;
     public GameObject[] destination;
     private Rigidbody rb; int i = 0;
-    [SerializeField] private TMP_Text EnemyNameText;
+    [HideInInspector] public TMP_Text EnemyNameText;
     public bool canMove;
     
 
@@ -64,20 +64,5 @@ public class EnemyAI : MonoBehaviourPun
     }
    
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Finishline"))
-        {
-            GameManager.instace.firstPlayer = true;
-            if (GameManager.instace.firstPlayer)
-            {
-                agent.isStopped = true;
-                Playercontroller.instance.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-                GameManager.instace.WinPanel.SetActive(true);
-                GameManager.instace.WinnernameText.text = " Winner: " + EnemyNameText.text;
-            }
-        }
-
-    }
-
+ 
 }

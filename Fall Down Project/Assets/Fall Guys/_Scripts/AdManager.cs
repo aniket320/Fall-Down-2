@@ -22,7 +22,7 @@ public class AdManager : MonoBehaviour
             Instance = this;
         }
     }
-  public void ShowAds()
+    public void ShowAds()
     {
         Invoke("ShowInterstitialAd", 1);
     }

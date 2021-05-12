@@ -9,14 +9,14 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instace;
-    public GameObject PlayerPrefab; 
+    public GameObject PlayerPrefab;
     public GameObject EnemyPrefab;
     public GameObject[] PlayerInstantiation;
     public GameObject WinPanel;
     public TMP_Text WinnernameText;
     public GameObject InitialRespawnpos;
     public GameObject NextRespawnpos;
-    public bool firstPlayer;
+    public bool firstPlayer = false;
     public TMP_Text GameStartCountDowntext;
     public int GameStartCountDown;
     private float starttime;
@@ -29,25 +29,26 @@ public class GameManager : MonoBehaviour
     //public GameObject[] QualifiedPlayer;
 
 
-    private void Start()
+    private void Awake()
     {
+        firstPlayer = false;
         CountDownOver = false;
         PlayerInstantiation = GameObject.FindGameObjectsWithTag("PlayerInstacePos");
         InitialRespawnpos = GameObject.FindGameObjectWithTag("RespawnPos");
         NextRespawnpos = GameObject.FindGameObjectWithTag("NextRespawnPos");
 
         starttime = GameStartCountDown;
-       
+
 
         if (instace == null)
         {
             instace = this;
-        }       
+        }
 
         if (PhotonNetwork.PlayerList.Count() == 1)
         {
             loadMainscene = true;
-            PlayerPrefs.SetInt("ShowIntersticialAds", 1);
+         
             for (int i = PhotonNetwork.PlayerList.Count(); i < 10; i++)
             {
                 PhotonNetwork.Instantiate(EnemyPrefab.name, PlayerInstantiation[i].transform.position, Quaternion.identity, 0);
@@ -60,12 +61,9 @@ public class GameManager : MonoBehaviour
             PhotonNetwork.Instantiate(PlayerPrefab.name, InitialRespawnpos.transform.position, Quaternion.identity, 0);
             PlayerPrefs.SetInt("ShowIntersticialAds", 0);
         }
-           
 
-        AudioManager.instance.Play("IngameAudio");
-        
 
-        StartCoroutine(LevelStart());
+       
 
         //public
 
@@ -82,6 +80,13 @@ public class GameManager : MonoBehaviour
 
         //QualifiedPlayer = new GameObject[NoOfPlayerCanQualifie];
 
+    }
+    private void Start()
+    {
+        AudioManager.instance.Play("IngameAudio");
+
+
+        StartCoroutine(LevelStart());
     }
     private void Update()
     {
@@ -114,6 +119,8 @@ public class GameManager : MonoBehaviour
    
     public void leaveGame()
     {
+        if(PhotonNetwork.PlayerList.Count() == 1)
+            PlayerPrefs.SetInt("ShowIntersticialAds", 1);
         StartCoroutine(ReturnTLobby());
     }
     IEnumerator ReturnTLobby()

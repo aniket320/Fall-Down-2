@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 367561316688e4f488d4809b12cad7e9,
     type: 2}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -14156,6 +14156,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 92823217}
     m_Modifications:
+    - target: {fileID: 1665003505, guid: 645f758d74aa10144907aa867bdac592, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1665003506, guid: 645f758d74aa10144907aa867bdac592, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -14296,3 +14300,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 645f758d74aa10144907aa867bdac592, type: 3}
+--- !u!1 &7313425929370525755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8155809207524415645, guid: 645f758d74aa10144907aa867bdac592,
+    type: 3}
+  m_PrefabInstance: {fileID: 7313425929370525754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &7313425929370525756
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7313425929370525755}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4990829700342139071, guid: cf43c3a415677c04abf9ec06d6195a40, type: 3}

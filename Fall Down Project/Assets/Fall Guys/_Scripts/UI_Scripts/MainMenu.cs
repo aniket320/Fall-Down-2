@@ -29,32 +29,32 @@ public class MainMenu : MonoBehaviourPunCallbacks
         AudioManager.instance.audioStop = true;
         DD.value = QualitySettings.GetQualityLevel();
         loding.gameObject.SetActive(true);
-        firstRun = PlayerPrefs.GetInt("saveUserNameForFirsttime");
-
-        
+       
+               
         
         if (PlayerPrefs.GetInt("ShowIntersticialAds") == 1)
-            AdManager.Instance.ShowAds();    //ads
+        {
+            AdManager.Instance.ShowAds();
+            PlayerPrefs.SetInt("ShowIntersticialAds", 0);
+        }
+            //ads
         else
             return;
-        PlayerPrefs.SetInt("ShowIntersticialAds", 0);
 
+        firstRun = PlayerPrefs.GetInt("saveUserNameForFirsttime");
         if (firstRun == 0) 
         {
             PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = "FallDown#" + Random.Range(0000, 9999));
             PlayerPrefs.SetInt("saveUserNameForFirsttime", 1);
             firstRun = 1;            
         }
-        else
-        {
-           return;
-        }
+       
       
       
         
     }
        
-        void Update()
+    void Update()
     {                     
             UsernamesDisplay.text = PlayerPrefs.GetString("UserName");        
     }

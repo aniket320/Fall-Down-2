@@ -29,8 +29,10 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     bool isGrounded;
     Vector3 smoothdamp;
     Quaternion smoothRotation;
+    public string PlayerUsername;
     private Animator anim;
-    public Animator ani; int i = 0;
+    public Animator a; int i = 0;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -47,7 +49,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         {
             instance = this;
         }
-
+        PlayerUsername = PhotonNetwork.NickName;
 
         rb = GetComponent<Rigidbody>();
         Camera = GameObject.Find("Main Camera");
@@ -138,33 +140,13 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
+           
         }
         if (stream.IsReading)
         {
             smoothdamp = (Vector3)stream.ReceiveNext();
             smoothRotation = (Quaternion)stream.ReceiveNext();
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //if (GameManager.instace.NoOfPlayerQualified <= GameManager.instace.NoOfPlayerCanQualifie)
-        //{
-            if (other.CompareTag("Finishline"))
-            {
-                GameManager.instace.firstPlayer = true;
-                if (GameManager.instace.firstPlayer)
-                {
-                    GameManager.instace.WinPanel.SetActive(true);
-                rb.constraints = RigidbodyConstraints.FreezePosition;
-                    GameManager.instace.WinnernameText.text = " Winner: " + PhotonNetwork.NickName;
-                    //PhotonNetwork.Destroy(this.gameObject);
-                }                
-
-                //GameManager.instace.NoOfPlayerQualified++;
-            }
-        //}
-
     }
 
 }

@@ -12,7 +12,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject disconnect;
     [SerializeField] private GameObject loding;
     [SerializeField] private TMP_InputField JoinGameInputField;
-    [SerializeField] private GameObject waitingforOtherPlayerPanel;
+    public GameObject waitingforOtherPlayerPanel;
     [SerializeField] private TMP_Text waitingforOtherPlayer_text;
     [SerializeField] private TextMeshProUGUI RoomNo;
     [SerializeField] private GameObject connectingPanel;
@@ -21,7 +21,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject PlayerListPrefab;
     [SerializeField] private GameObject Playbtn;
     [SerializeField] private GameObject Error_Num_Players;
-    private int level;
 
     private void Awake()
     {
@@ -146,15 +145,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     IEnumerator SceneLoad()
     {
         yield return new WaitForSeconds(3);
-        level = Random.Range(2, 5);
+        int level = Random.Range(2, 5);
         PhotonNetwork.LoadLevel(2);
     }
     IEnumerator InRoomSceneLoad()
     {
         yield return new WaitForSeconds(3);
-        level = Random.Range(2, 7);
+        int level = Random.Range(2, 7);
         PhotonNetwork.LoadLevel(2);
-
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
