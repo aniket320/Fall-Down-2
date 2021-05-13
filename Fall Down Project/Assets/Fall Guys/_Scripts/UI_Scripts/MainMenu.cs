@@ -44,7 +44,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
         firstRun = PlayerPrefs.GetInt("saveUserNameForFirsttime");
         if (firstRun == 0) 
         {
-            PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = "FallDown#" + Random.Range(0000, 9999));
+            PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = "FD#" + Random.Range(0000, 9999));
             PlayerPrefs.SetInt("saveUserNameForFirsttime", 1);
             firstRun = 1;            
         }
