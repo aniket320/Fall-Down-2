@@ -201,7 +201,7 @@ MonoBehaviour:
   destination: []
   PlayerUsername: 
   canMove: 0
-  enablemobileInput: 0
+  enablemobileInput: 1
 --- !u!136 &1583396347178976341
 CapsuleCollider:
   m_ObjectHideFlags: 0
