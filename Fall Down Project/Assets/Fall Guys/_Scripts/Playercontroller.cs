@@ -38,6 +38,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     public bool canMove;
     //public FixedTouchField touchField;
     public bool enablemobileInput = false;
+    private Animator animator;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     }
     void Start()
     {
+        animator = GetComponent<Animator>();
         canMove = true;
         //GameManager.instace.WinPanel.SetActive(false);
         if(instance == null)
@@ -114,9 +116,18 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime,ForceMode.Impulse);
-            GetComponent<Animator>().Play("jump");
+            // GetComponent<Animator>().Play("jump");
+            animator.SetBool("jump", true);
+            
 
         }
+        else
+        {
+            animator.SetBool("jump", false);
+            animator.SetBool("run", false);
+
+        }
+
 
         if (this.transform.position.y <= -15f)
         {
@@ -142,7 +153,13 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
             Vector3 moveAngle = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             rb.MovePosition(rb.position + moveAngle * Time.fixedDeltaTime * speed);
-            GetComponent<Animator>().Play("run");
+            // GetComponent<Animator>().Play("run");
+            animator.SetBool("run", true);
+        }
+        else
+        {
+            animator.SetBool("run", false);
+
         }
     }
     public void JumpButton()
@@ -150,7 +167,15 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         if (isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
-            GetComponent<Animator>().Play("jump");
+            //GetComponent<Animator>().Play("jump");
+            animator.SetBool("jump", true);
+            
+        }
+        else
+        {
+            animator.SetBool("jump", false);
+            animator.SetBool("run", false);
+
         }
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
