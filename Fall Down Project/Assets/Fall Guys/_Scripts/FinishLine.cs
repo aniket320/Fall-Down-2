@@ -29,9 +29,7 @@ public class FinishLine : MonoBehaviourPun
         {
            
             GameManager.instace.WinPanel.SetActive(true);
-            string nickName = other.gameObject.GetComponent<PhotonView>().Owner.NickName;
-            Debug.Log(nickName);
-            GameManager.instace.WinnernameText.text = nickName;
+            GameManager.instace.WinnernameText.text = other.gameObject.GetComponent<PhotonView>().Owner.NickName;
 
             if (Players != null)
             {
