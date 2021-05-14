@@ -2497,6 +2497,7 @@ namespace Photon.Pun
 
         // to be used in the main thread. as OnRegionsPinged is called in a separate thread and so we can't use some of the Unity methods (like saving playerPrefs)
         private static RegionHandler _cachedRegionHandler;
+        public static object player;
 
         private static void OnRegionsPinged(RegionHandler regionHandler)
         {

@@ -23,6 +23,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     [SerializeField] private TMP_Text PlayerNameText;
     [SerializeField] private GameObject[] destination;
     [HideInInspector] public string PlayerUsername;
+    [SerializeField] private AudioClip JumpAudioClip;
     Rigidbody rb;
     float smoothDampReference;
     float currentvelocity;
@@ -35,7 +36,9 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     Quaternion smoothRotation;
     int i = 0;
     float x; float y;
-    private Animator animator;
+    Animator animator;
+    AudioSource audios;
+   
     public bool canMove;
     public bool enablemobileInput = false;
     // Start is called before the first frame update
@@ -55,9 +58,9 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         {
             instance = this;
         }
-        PlayerUsername = PhotonNetwork.NickName;
 
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>(); 
+        audios = GetComponent<AudioSource>();
         Camera = GameObject.Find("Main Camera");
 
         if (photonview.IsMine)
@@ -92,10 +95,12 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         {
              x = joystick.Horizontal;
              y = joystick.Vertical;
+
             float p = Mathf.SmoothDamp(0, FixedTouchField.instance.TouchDist.y, ref smoothDampReference, Time.deltaTime*smoothDampY);
             float q = Mathf.SmoothDamp(0, FixedTouchField.instance.TouchDist.x, ref smoothDampReference, Time.deltaTime*smoothDampX);
             thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_YAxis.Value +=p;
             thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_XAxis.Value -= q;
+
             thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = null;
             thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = null;
 
@@ -118,7 +123,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
-            //anim.Play("jump");
+            audios.PlayOneShot(JumpAudioClip);
             animator.SetBool("jump", true);
 
 
@@ -166,7 +171,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         if (isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
-                animator.SetBool("jump", true);
+            animator.SetBool("jump", true);
+            audios.PlayOneShot(JumpAudioClip);
 
         }
          else

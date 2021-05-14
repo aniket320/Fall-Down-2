@@ -3,15 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using TMPro;
 public class FinishLine : MonoBehaviourPun
 {
     [SerializeField] private GameObject[] enemy;
     [SerializeField] private GameObject[] Players;
+    
     private void Start()
     {
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
         Players = GameObject.FindGameObjectsWithTag("Player");
+        StartCoroutine(playerCount());
+    }
+    IEnumerator playerCount()
+    {
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        Players = GameObject.FindGameObjectsWithTag("Player");
+        yield return new WaitForSeconds(3);
+        StartCoroutine(playerCount());
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -20,7 +29,10 @@ public class FinishLine : MonoBehaviourPun
         {
            
             GameManager.instace.WinPanel.SetActive(true);
-            GameManager.instace.WinnernameText.text = other.gameObject.GetComponent<Playercontroller>().PlayerUsername;
+            string nickName = other.gameObject.GetComponent<PhotonView>().Owner.NickName;
+            Debug.Log(nickName);
+            GameManager.instace.WinnernameText.text = nickName;
+
             if (Players != null)
             {
                 foreach (GameObject p in Players)

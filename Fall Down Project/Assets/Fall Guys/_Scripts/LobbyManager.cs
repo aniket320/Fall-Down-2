@@ -64,7 +64,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("isDisconnected");
-        Invoke("disconnetPanel", 3);
+        Invoke("disconnetPanel", 5);
     }  
     private void disconnetPanel() { disconnect.gameObject.SetActive(true);  }
     public override void OnJoinedLobby()
