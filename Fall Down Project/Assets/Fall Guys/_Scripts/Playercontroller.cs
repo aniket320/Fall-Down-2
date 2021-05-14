@@ -35,8 +35,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     Quaternion smoothRotation;
     int i = 0;
     float x; float y;
+    Animator anim;
     public bool canMove;
-    //public FixedTouchField touchField;
     public bool enablemobileInput = false;
     // Start is called before the first frame update
     private void Awake()
@@ -64,6 +64,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         {
             thirdpersonCamera.SetActive(true);
             PlayerNameText.text = PhotonNetwork.NickName;
+            anim = GetComponent<Animator>();
         }
         else
             PlayerNameText.text = photonView.Owner.NickName;
@@ -114,7 +115,8 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime,ForceMode.Impulse);
-            GetComponent<Animator>().Play("jump");
+            //anim.Play("jump");
+            anim.SetTrigger("Jump");
 
         }
 
@@ -136,21 +138,25 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         Vector3 direction = new Vector3(x, 0, y);
         if (direction.magnitude >= 0.1f)
         {
-           
+            
+
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.transform.eulerAngles.y; 
             float rot = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentvelocity, smoothRottime);
             transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
             Vector3 moveAngle = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             rb.MovePosition(rb.position + moveAngle * Time.fixedDeltaTime * speed);
-            GetComponent<Animator>().Play("run");
+            //anim.Play("run");
         }
+        anim.SetBool("run", true);
+        //anim.SetFloat("Run", direction.magnitude);
     }
     public void JumpButton()
     {
         if (isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
-            GetComponent<Animator>().Play("jump");
+            //anim.Play("jump");
+            anim.SetTrigger("Jump");
         }
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
