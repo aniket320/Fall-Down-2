@@ -19,13 +19,23 @@ public class MainMenu : MonoBehaviourPunCallbacks
     [SerializeField] private TMP_Text UsernamesDisplay;
     [SerializeField] private GameObject loding;
     public AudioMixer audiomixer;
-    int firstRun = 0;
+    int firstRun;
     public TMP_Dropdown DD;    
     public RenderPipelineAsset[] qualitylevels;
    
     // Start is called before the first frame update
     void Start()
-    {      
+    {
+        firstRun = 0;
+        firstRun = PlayerPrefs.GetInt("saveUserNameForFirsttime");
+
+        if (firstRun != 1)
+        {
+            PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = "FallDown#" + Random.Range(0000, 9999));
+            PlayerPrefs.SetInt("saveUserNameForFirsttime", 1);
+            firstRun = 1;
+        }
+
         AudioManager.instance.audioStop = true;
         DD.value = QualitySettings.GetQualityLevel();
         loding.gameObject.SetActive(true);
@@ -41,13 +51,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
         else
             return;
 
-        firstRun = PlayerPrefs.GetInt("saveUserNameForFirsttime");
-        if (firstRun == 0) 
-        {
-            PlayerPrefs.SetString("UserName", PhotonNetwork.NickName = "FD#" + Random.Range(0000, 9999));
-            PlayerPrefs.SetInt("saveUserNameForFirsttime", 1);
-            firstRun = 1;            
-        }
+       
        
       
       

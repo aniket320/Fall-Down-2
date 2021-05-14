@@ -146,13 +146,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(3);
         int level = Random.Range(2, 5);
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(level);
     }
     IEnumerator InRoomSceneLoad()
     {
         yield return new WaitForSeconds(3);
         int level = Random.Range(2, 7);
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(level);
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {

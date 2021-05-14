@@ -35,7 +35,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
     Quaternion smoothRotation;
     int i = 0;
     float x; float y;
-    Animator anim;
+    private Animator animator;
     public bool canMove;
     public bool enablemobileInput = false;
     // Start is called before the first frame update
@@ -64,7 +64,7 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
         {
             thirdpersonCamera.SetActive(true);
             PlayerNameText.text = PhotonNetwork.NickName;
-            anim = GetComponent<Animator>();
+            animator = GetComponent<Animator>();
         }
         else
             PlayerNameText.text = photonView.Owner.NickName;
@@ -96,6 +96,9 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
             float q = Mathf.SmoothDamp(0, FixedTouchField.instance.TouchDist.x, ref smoothDampReference, Time.deltaTime*smoothDampX);
             thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_YAxis.Value +=p;
             thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_XAxis.Value -= q;
+            thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_YAxis.m_InputAxisName = null;
+            thirdpersonCamera.GetComponent<CinemachineFreeLook>().m_XAxis.m_InputAxisName = null;
+
         }
         else
         {
@@ -114,15 +117,22 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime,ForceMode.Impulse);
+            rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
             //anim.Play("jump");
-            anim.SetTrigger("Jump");
+            animator.SetBool("jump", true);
+
+
+        }
+        else
+        {
+            animator.SetBool("jump", false);
+            animator.SetBool("run", false);
 
         }
 
         if (this.transform.position.y <= -15f)
         {
-           Destroy(this.gameObject);
+            Destroy(this.gameObject);
             if (transform.position.z >= GameManager.instace.NextRespawnpos.transform.position.z)
             {
                 PhotonNetwork.Instantiate(GameManager.instace.PlayerPrefab.name, GameManager.instace.NextRespawnpos.transform.position, Quaternion.identity, 0);
@@ -133,31 +143,37 @@ public class Playercontroller : MonoBehaviourPun,IPunObservable
 
         }
 
-        
+
 
         Vector3 direction = new Vector3(x, 0, y);
         if (direction.magnitude >= 0.1f)
         {
-            
 
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.transform.eulerAngles.y; 
+
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + Camera.transform.eulerAngles.y;
             float rot = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentvelocity, smoothRottime);
             transform.rotation = Quaternion.Euler(new Vector3(0, rot, 0));
             Vector3 moveAngle = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
             rb.MovePosition(rb.position + moveAngle * Time.fixedDeltaTime * speed);
-            //anim.Play("run");
+            animator.SetBool("run", true);
         }
-        anim.SetBool("run", true);
-        //anim.SetFloat("Run", direction.magnitude);
-    }
+        else
+        {
+            animator.SetBool("run", false);
+        } }
     public void JumpButton()
     {
         if (isGrounded)
         {
             rb.AddForce(Vector3.up * JumpForce * Time.fixedDeltaTime, ForceMode.Impulse);
-            //anim.Play("jump");
-            anim.SetTrigger("Jump");
+                animator.SetBool("jump", true);
+
         }
+         else
+            {
+                animator.SetBool("jump", false);
+                animator.SetBool("run", false);
+            }   
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {

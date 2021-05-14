@@ -190,8 +190,8 @@ MonoBehaviour:
   speed: 5
   JumpForce: 200
   smoothMove: 10
-  smoothDampY: 0.5
-  smoothDampX: 0.05
+  smoothDampY: 50
+  smoothDampX: 10
   GroundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -201,7 +201,7 @@ MonoBehaviour:
   destination: []
   PlayerUsername: 
   canMove: 0
-  enablemobileInput: 1
+  enablemobileInput: 0
 --- !u!136 &1583396347178976341
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -296,12 +296,6 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: jump
-  - Type: 1
-    SynchronizeType: 0
-    Name: Run
-  - Type: 9
-    SynchronizeType: 0
-    Name: Jump
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
