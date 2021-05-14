@@ -3370,7 +3370,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Connectint To The Server
+  m_Text: 'Connecting To The Server
 
     Please Wait...'
 --- !u!222 &1178650331
