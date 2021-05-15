@@ -149,6 +149,7 @@ GameObject:
   - component: {fileID: 1027844613886690833}
   - component: {fileID: 809011366102214121}
   - component: {fileID: -7692859230194775318}
+  - component: {fileID: 2902529819884146644}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -397,6 +398,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2902529819884146644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027844613886690829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71439f36baeae245b86426ed0029794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 7820282579401349143}
+  respawnpoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1027844615154810959
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,7 +470,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.001
+    NearClipPlane: 0.3
     FarClipPlane: 5000
     Dutch: 0
     LensShift: {x: 0, y: 0}
