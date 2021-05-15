@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: level1
+  m_Name: level5
   m_Shader: {fileID: 10751, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -45,8 +45,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 664b4cab7f84a5344aa59c118c6ee3ee, type: 3}
-        m_Scale: {x: 1, y: -4}
+        m_Texture: {fileID: 2800000, guid: 86c5bd5711cc05f42abb9ba73fd9caab, type: 3}
+        m_Scale: {x: 1, y: 90}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -65,7 +65,7 @@ Material:
     - _Blend: 0
     - _BumpScale: 1
     - _Cull: 2
-    - _Cutoff: 0.84
+    - _Cutoff: 0.4
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
